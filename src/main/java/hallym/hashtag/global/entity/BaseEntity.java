@@ -1,6 +1,7 @@
-package hallym.hashtag.entity;
+package hallym.hashtag.global.entity;
 
 import lombok.Getter;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,20 +14,20 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-@EntityListeners(value = {AuditingEntityListener.class})
-
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
     @CreatedDate
-    @DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "regdate", updatable = false)
     private LocalDateTime regDate;
 
     @LastModifiedDate
-    @DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-    @Column(name = "moddate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name ="moddate" )
     private LocalDateTime modDate;
 
-    private boolean is_deleted;
-
+    @ColumnDefault("false")
+    private boolean deleted;
 }
+
