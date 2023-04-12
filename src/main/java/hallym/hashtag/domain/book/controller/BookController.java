@@ -3,10 +3,9 @@ package hallym.hashtag.domain.book.controller;
 import hallym.hashtag.domain.book.dto.BookDto;
 import hallym.hashtag.domain.book.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,5 +16,10 @@ public class BookController {
     @PostMapping
     public BookDto bookCreate(@RequestBody BookDto bookDto) {
         return bookService.create(bookDto);
+    }
+
+    @GetMapping("list")
+    public List<BookDto> bookFindAll() {
+        return bookService.findAll();
     }
 }

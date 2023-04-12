@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -19,6 +21,17 @@ public class BookServicelmpl implements BookService {
         Book newBook = toEntity(bookDto);
         bookRepository.save(newBook);
         return toDto(newBook);
+    }
+
+    @Override
+    public List<BookDto> findAll() {
+        List<Book> bookList = bookRepository.findAll();
+        return bookList.stream().map(s -> toDto(s)).collect(Collectors.toList());
+    }
+
+    @Override
+    public BookDto findByOne(Long bno) {
+        return null;
     }
 
     public Book toEntity(BookDto bookDto) {

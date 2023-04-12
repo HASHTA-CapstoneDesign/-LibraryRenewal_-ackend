@@ -29,7 +29,7 @@ public class StudentServicelmpl implements StudentService {
     @Override
     public List<StudentResponseDto> findAllList() {
         List<Student> studentList = studentRepository.findAll();
-        return studentList.stream().map(this::toDto).collect(Collectors.toList());
+        return studentList.stream().map(s -> toDto(s)).collect(Collectors.toList());
     }
 
     @Override
