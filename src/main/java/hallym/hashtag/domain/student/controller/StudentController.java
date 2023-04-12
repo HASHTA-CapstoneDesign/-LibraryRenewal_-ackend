@@ -26,4 +26,10 @@ public class StudentController {
     public StudentResponseDto studentFindByOne(@PathVariable("sno") Long sno) {
         return studentService.findByOne(sno);
     }
+
+    @PutMapping("{sno}")
+    public StudentResponseDto studentUpdate(@PathVariable(name = "sno") Long sno,
+                                            @RequestBody StudentRequestDto studentRequestDto){
+        return studentService.update(sno, studentRequestDto);
+    }
 }

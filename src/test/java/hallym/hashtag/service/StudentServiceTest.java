@@ -36,4 +36,18 @@ public class StudentServiceTest {
         studentService.findByOne(sno);
         System.out.println("----------조회 완료!----------");
     }
+
+    @Test
+    public void testUpdate() {
+        Long sno = 1L;
+        StudentRequestDto studentRequestDto = StudentRequestDto.builder()
+                .name("김미진")
+                .phone("010-0000-0000")
+                .cleanup(2020000L)
+                .major("소프트웨어학부")
+                .password("1111")
+                .build();
+        studentService.update(sno, studentRequestDto);
+        System.out.println("----------수정 완료!----------");
+    }
 }

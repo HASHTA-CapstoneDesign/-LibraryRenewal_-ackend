@@ -11,4 +11,6 @@ public interface StudentService {
     List<StudentResponseDto> findAllList();
 
     StudentResponseDto findByOne(Long sno);
+
+    StudentResponseDto update(Long sno, StudentRequestDto studentRequestDto);
 }

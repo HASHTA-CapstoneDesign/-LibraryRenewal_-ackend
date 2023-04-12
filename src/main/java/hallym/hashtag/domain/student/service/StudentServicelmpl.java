@@ -41,6 +41,17 @@ public class StudentServicelmpl implements StudentService {
         return toDto(student);
     }
 
+    @Override
+    public StudentResponseDto update(Long sno, StudentRequestDto studentRequestDto) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty())
+            return null;
+        Student student = bySno.get();
+        student.updateStudent(toEntity(studentRequestDto));
+        studentRepository.save(student);
+        return toDto(student);
+    }
+
     public Student toEntity(StudentRequestDto studentRequestDto){
         return Student.builder()
                 .sno(studentRequestDto.getSno())
