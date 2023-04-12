@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class StudentRequestDto {
     private Long sno;
+
     private String name;
+
     private String phone;
+
     private Long cleanup;
+
     private String major;
+
     private String password;
+
     private Boolean deleted;
-
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime regDate;
-
-    @JsonIgnore
-    private LocalDateTime modDate;
 }

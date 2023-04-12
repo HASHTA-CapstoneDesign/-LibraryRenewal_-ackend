@@ -5,7 +5,6 @@ import hallym.hashtag.domain.student.dto.StudentResponseDto;
 import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.student.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServicelmpl implements StudentService {
     private final StudentRepository studentRepository;
-    private final ModelMapper modelMapper;
+//    private final ModelMapper modelMapper;
 
     @Override
     public StudentResponseDto create(StudentRequestDto studentRequestDto) {

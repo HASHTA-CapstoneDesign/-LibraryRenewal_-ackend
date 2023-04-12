@@ -1,6 +1,6 @@
 package hallym.hashtag.domain.student.entity;
 
-import hallym.hashtag.global.entity.BaseEntity;
+import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

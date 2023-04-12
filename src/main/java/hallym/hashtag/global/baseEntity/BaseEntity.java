@@ -1,4 +1,4 @@
-package hallym.hashtag.global.entity;
+package hallym.hashtag.global.baseEntity;
 
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
