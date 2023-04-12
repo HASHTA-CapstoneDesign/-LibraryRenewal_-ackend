@@ -1,6 +1,7 @@
 package hallym.hashtag.repository;
 
 import hallym.hashtag.domain.book.entity.Book;
+import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.repository.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class BookRepositoryTest {
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
                 .bookPage(123L)
+                .bookType(BookType.철학)
                 .build();
         bookRepository.save(book);
 

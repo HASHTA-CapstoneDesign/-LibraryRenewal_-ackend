@@ -32,6 +32,8 @@ public class Book extends BaseEntity {
 
     private Long bookPage;
 
+    private BookType bookType;
+
     public void updateBook(Book book) {
 //        BeanUtils.copyProperties(book, this);
         this.title = book.title;
@@ -39,5 +41,6 @@ public class Book extends BaseEntity {
         this.isbn = book.isbn;
         this.pudDate = book.pudDate;
         this.bookPage = book.bookPage;
+        this.bookType = book.bookType;
     }
 }
