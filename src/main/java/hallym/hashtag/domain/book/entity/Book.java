@@ -20,6 +20,8 @@ public class Book extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
 
+    private Long tag;
+
     private String title;
 
     private String author;

@@ -14,6 +14,7 @@ public class BookRepositoryTest {
     @Test
     public void testSave() {
         Book book = Book.builder()
+                .tag(100L)
                 .title("제목")
                 .author("김미진")
                 .isbn("1111")

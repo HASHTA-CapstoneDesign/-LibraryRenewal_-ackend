@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class BookDto {
     private Long bno;
 
+    private Long tag;
+
     private String title;
 
     private String author;

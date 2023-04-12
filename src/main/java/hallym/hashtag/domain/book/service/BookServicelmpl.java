@@ -50,9 +50,20 @@ public class BookServicelmpl implements BookService {
         return toDto(book);
     }
 
+    @Override
+    public String delete(Long bno) {
+        Optional<Book> byBno = bookRepository.findById(bno);
+        if(byBno.isEmpty())
+            return "ID가 없습니다.";
+        Book book = byBno.get();
+        bookRepository.delete(book);
+        return "삭제되었습니다.";
+    }
+
     public Book toEntity(BookDto bookDto) {
         return Book.builder()
                 .bno(bookDto.getBno())
+                .tag(bookDto.getTag())
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .isbn(bookDto.getIsbn())
@@ -64,6 +75,7 @@ public class BookServicelmpl implements BookService {
     public BookDto toDto(Book book) {
         return BookDto.builder()
                 .bno(book.getBno())
+                .tag(book.getTag())
                 .title(book.getTitle())
                 .author(book.getAuthor())
                 .isbn(book.getIsbn())

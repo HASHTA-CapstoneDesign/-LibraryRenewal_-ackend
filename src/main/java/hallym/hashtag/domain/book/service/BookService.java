@@ -12,4 +12,6 @@ public interface BookService {
     BookDto findByOne(Long bno);
 
     BookDto update(Long bno, BookDto bookDto);
+
+    String delete(Long bno);
 }

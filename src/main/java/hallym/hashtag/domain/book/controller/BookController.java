@@ -27,4 +27,14 @@ public class BookController {
     public BookDto bookFindByOne(@PathVariable(name = "bno") Long bno) {
         return bookService.findByOne(bno);
     }
+
+    @PutMapping("{bno}")
+    public BookDto bookUpdate(@PathVariable(name = "bno") Long bno, @RequestBody BookDto bookDto) {
+        return bookService.update(bno, bookDto);
+    }
+
+    @DeleteMapping("{bno}")
+    public String bookDelete(@PathVariable(name = "bno") Long bno){
+        return bookService.delete(bno);
+    }
 }

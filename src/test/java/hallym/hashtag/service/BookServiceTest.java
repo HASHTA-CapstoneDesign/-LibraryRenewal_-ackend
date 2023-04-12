@@ -13,6 +13,7 @@ public class BookServiceTest {
     @Test
     public void bookCreate() {
         BookDto bookDto = BookDto.builder()
+                .tag(100L)
                 .title("제목")
                 .author("김미진")
                 .isbn("1111")
@@ -49,5 +50,12 @@ public class BookServiceTest {
 
         bookService.update(bno, bookDto);
         System.out.println("----------수정 완료!----------");
+    }
+
+    @Test
+    public void bookDelete() {
+        Long bno = 1L;
+        bookService.delete(bno);
+        System.out.println("----------삭제 완료!----------");
     }
 }
