@@ -13,4 +13,6 @@ public interface StudentService {
     StudentResponseDto findByOne(Long sno);
 
     StudentResponseDto update(Long sno, StudentRequestDto studentRequestDto);
+
+    StudentResponseDto updatePassword(Long sno, String password);
 }

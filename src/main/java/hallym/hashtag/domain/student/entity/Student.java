@@ -32,4 +32,8 @@ public class Student extends BaseEntity {
         this.cleanup = student.cleanup;
         this.major = student.major;
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }

@@ -50,4 +50,12 @@ public class StudentServiceTest {
         studentService.update(sno, studentRequestDto);
         System.out.println("----------수정 완료!----------");
     }
+
+    @Test
+    public void testUpdatePassword() {
+        Long sno = 1L;
+        String password = "2222";
+        studentService.updatePassword(sno, password);
+        System.out.println("----------수정 완료!----------");
+    }
 }

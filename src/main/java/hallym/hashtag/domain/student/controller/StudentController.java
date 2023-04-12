@@ -32,4 +32,10 @@ public class StudentController {
                                             @RequestBody StudentRequestDto studentRequestDto){
         return studentService.update(sno, studentRequestDto);
     }
+
+    @PutMapping("password/{sno}")
+    public StudentResponseDto studentUpdatePassword(@PathVariable(name = "sno") Long sno,
+                                                    @RequestBody  String password) {
+        return studentService.updatePassword(sno, password);
+    }
 }
