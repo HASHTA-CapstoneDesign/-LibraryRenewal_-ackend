@@ -41,6 +41,38 @@ public class StudentServicelmpl implements StudentService {
         return toDto(student);
     }
 
+    @Override
+    public StudentResponseDto update(Long sno, StudentRequestDto studentRequestDto) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty())
+            return null;
+        Student student = bySno.get();
+        student.updateStudent(toEntity(studentRequestDto));
+        studentRepository.save(student);
+        return toDto(student);
+    }
+
+    @Override
+    public StudentResponseDto updatePassword(Long sno, String password) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty())
+            return null;
+        Student student = bySno.get();
+        student.updatePassword(password);
+        studentRepository.save(student);
+        return toDto(student);
+    }
+
+    @Override
+    public String delete(Long sno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty())
+            return "ID가 없습니다.";
+        Student student = bySno.get();
+        studentRepository.delete(student);
+        return "삭제되었습니다.";
+    }
+
     public Student toEntity(StudentRequestDto studentRequestDto){
         return Student.builder()
                 .sno(studentRequestDto.getSno())

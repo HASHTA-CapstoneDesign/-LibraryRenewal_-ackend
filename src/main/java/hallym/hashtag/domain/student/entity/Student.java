@@ -25,4 +25,15 @@ public class Student extends BaseEntity {
     private String major;
 
     private String password;
+
+    public void updateStudent(Student student) {
+        this.name = student.name;
+        this.phone = student.phone;
+        this.cleanup = student.cleanup;
+        this.major = student.major;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }
