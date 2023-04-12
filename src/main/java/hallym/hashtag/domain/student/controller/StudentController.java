@@ -38,4 +38,9 @@ public class StudentController {
                                                     @RequestBody  String password) {
         return studentService.updatePassword(sno, password);
     }
+
+    @DeleteMapping("{sno}")
+    public String studentDeleted(@PathVariable(name = "sno") Long sno){
+        return studentService.delete(sno);
+    }
 }

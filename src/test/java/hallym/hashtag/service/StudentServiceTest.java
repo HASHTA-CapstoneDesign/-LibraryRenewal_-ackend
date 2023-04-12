@@ -58,4 +58,11 @@ public class StudentServiceTest {
         studentService.updatePassword(sno, password);
         System.out.println("----------수정 완료!----------");
     }
+
+    @Test
+    public void testDeleted(){
+        Long sno = 1L;
+        studentService.delete(sno);
+        System.out.println("----------삭제 완료!----------");
+    }
 }
