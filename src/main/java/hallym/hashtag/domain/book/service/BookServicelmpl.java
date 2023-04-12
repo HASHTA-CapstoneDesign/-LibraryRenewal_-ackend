@@ -39,6 +39,17 @@ public class BookServicelmpl implements BookService {
         return toDto(book);
     }
 
+    @Override
+    public BookDto update(Long bno, BookDto bookDto) {
+        Optional<Book> byBno = bookRepository.findById(bno);
+        if(byBno.isEmpty())
+            return null;
+        Book book = byBno.get();
+        book.updateBook(toEntity(bookDto));
+        bookRepository.save(book);
+        return toDto(book);
+    }
+
     public Book toEntity(BookDto bookDto) {
         return Book.builder()
                 .bno(bookDto.getBno())

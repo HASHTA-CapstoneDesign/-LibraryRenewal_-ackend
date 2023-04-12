@@ -35,4 +35,19 @@ public class BookServiceTest {
         bookService.findByOne(bno);
         System.out.println("----------출력 완료----------");
     }
+
+    @Test
+    public void bookUpdate() {
+        Long bno = 1L;
+        BookDto bookDto = BookDto.builder()
+                .title("수정")
+                .author("김선아")
+                .isbn("1111")
+                .pudDate("2001년 05월 10일")
+                .bookPage(100L)
+                .build();
+
+        bookService.update(bno, bookDto);
+        System.out.println("----------수정 완료!----------");
+    }
 }

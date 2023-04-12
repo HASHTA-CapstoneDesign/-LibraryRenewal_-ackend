@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 
@@ -28,4 +29,13 @@ public class Book extends BaseEntity {
     private String pudDate;
 
     private Long bookPage;
+
+    public void updateBook(Book book) {
+//        BeanUtils.copyProperties(book, this);
+        this.title = book.title;
+        this.author = book.author;
+        this.isbn = book.isbn;
+        this.pudDate = book.pudDate;
+        this.bookPage = book.bookPage;
+    }
 }
