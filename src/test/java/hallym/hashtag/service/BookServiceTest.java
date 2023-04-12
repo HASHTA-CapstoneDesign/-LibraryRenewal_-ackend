@@ -28,4 +28,11 @@ public class BookServiceTest {
         bookService.findAll();
         System.out.println("----------조회 완료!----------");
     }
+
+    @Test
+    public void bookFindByOne() {
+        Long bno = 1L;
+        bookService.findByOne(bno);
+        System.out.println("----------출력 완료----------");
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -31,7 +32,11 @@ public class BookServicelmpl implements BookService {
 
     @Override
     public BookDto findByOne(Long bno) {
-        return null;
+        Optional<Book> byBno = bookRepository.findById(bno);
+        if(byBno.isEmpty())
+            return null;
+        Book book = byBno.get();
+        return toDto(book);
     }
 
     public Book toEntity(BookDto bookDto) {

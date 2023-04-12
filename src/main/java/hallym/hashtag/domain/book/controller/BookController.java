@@ -22,4 +22,9 @@ public class BookController {
     public List<BookDto> bookFindAll() {
         return bookService.findAll();
     }
+
+    @GetMapping("{bno}")
+    public BookDto bookFindByOne(@PathVariable(name = "bno") Long bno) {
+        return bookService.findByOne(bno);
+    }
 }
