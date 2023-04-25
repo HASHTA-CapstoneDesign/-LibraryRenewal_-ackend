@@ -21,8 +21,8 @@ public class ABookServicelmpl implements ABookService {
 
     @Override
     public ABookResponseDto create(Long bno, ABookRequestDto aBookRequestDto) {
-        Optional<Book> byID = bookRepository.findById(bno);
-        aBookRequestDto.setBook(byID.get());
+        Optional<Book> byId = bookRepository.findById(bno);
+        aBookRequestDto.setBook(byId.get());
         ABook newABook = toEntity(aBookRequestDto);
         aBookRepository.save(newABook);
         return toDto(newABook);

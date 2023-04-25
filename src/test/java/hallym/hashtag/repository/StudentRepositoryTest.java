@@ -23,4 +23,5 @@ public class StudentRepositoryTest {
         System.out.println("----------저장 완료!----------");
     }
 
+
 }
