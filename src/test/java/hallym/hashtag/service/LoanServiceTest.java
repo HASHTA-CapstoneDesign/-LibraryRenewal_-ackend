@@ -21,4 +21,12 @@ public class LoanServiceTest {
 
         loanService.create(loanRequestDto, sno, sbno);
     }
+
+    @Test
+    public void loanUpdate() {
+        Long sno = 1L;
+        Long lno = 1L;
+
+        loanService.extension(sno, lno);
+    }
 }

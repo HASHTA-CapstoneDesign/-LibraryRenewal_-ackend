@@ -26,6 +26,10 @@ public class LoanServicelmpl implements LoanService {
     public LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno) {
         Optional<ABook> byAbno = aBookRepository.findById(abno);
         Optional<Student> bySno = studentRepository.findById(sno);
+
+        if(byAbno.isEmpty()) return null;
+        if(bySno.isEmpty()) return null;
+
         loanRequestDto.setABook(byAbno.get());
         loanRequestDto.setStudent(bySno.get());
 
@@ -37,6 +41,26 @@ public class LoanServicelmpl implements LoanService {
         loanRepository.save(newLoan);
         return toDto(newLoan);
     }
+
+    @Override
+    public LoanResponseDto extension(Long sno, Long lno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        Optional<Loan> byLno = loanRepository.findById(lno);
+
+        if(bySno.isEmpty()) return null;
+        if(byLno.isEmpty()) return null;
+
+        LocalDate Date = byLno.get().getRetDate();
+        LocalDate retDate = Date.plusDays(7);
+
+        Loan updateLoan = byLno.get();
+
+        updateLoan.setRetDate(retDate);
+
+        loanRepository.save(updateLoan);
+        return toDto(updateLoan);
+    }
+
 
     Loan toEntity(LoanRequestDto loanRequestDto){
         return Loan.builder()
