@@ -40,12 +40,12 @@ public class Loan {
     private LocalDate NowRetDate;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "abno")
     private ABook aBook;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sno")
     private Student student;
 }

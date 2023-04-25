@@ -20,9 +20,15 @@ public class LoanController {
         return loanService.create(loanRequestDto, sno, abno);
     }
 
-    @PutMapping("{sno}/{lno}")
+    @PutMapping("checkout/{sno}/{lno}")
     public LoanResponseDto loanExtension(@PathVariable(name = "sno") Long sno,
                                       @PathVariable(name = "lno") Long lno){
         return loanService.extension(sno, lno);
+    }
+
+    @PutMapping("return/{sno}/{lno}")
+    public LoanResponseDto loanReturn(@PathVariable(name = "sno") Long sno,
+                                      @PathVariable(name = "lno") Long lno) {
+        return loanService.returnBook(sno, lno);
     }
 }
