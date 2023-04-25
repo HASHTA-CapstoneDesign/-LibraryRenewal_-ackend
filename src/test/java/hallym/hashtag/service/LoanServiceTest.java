@@ -13,13 +13,13 @@ public class LoanServiceTest {
 
     @Test
     public void loanCreate() {
-        Long sbno = 1L;
+        Long abno = 1L;
         Long sno = 1L;
 
         LoanRequestDto loanRequestDto = LoanRequestDto.builder()
                 .build();
 
-        loanService.create(loanRequestDto, sno, sbno);
+        loanService.create(loanRequestDto, sno, abno);
     }
 
     @Test
@@ -28,5 +28,13 @@ public class LoanServiceTest {
         Long lno = 1L;
 
         loanService.extension(sno, lno);
+    }
+
+    @Test
+    public void loanReturn() {
+        Long sno = 1L;
+        Long lno = 1L;
+
+        loanService.returnBook(sno, lno);
     }
 }

@@ -61,6 +61,25 @@ public class LoanServicelmpl implements LoanService {
         return toDto(updateLoan);
     }
 
+    @Override
+    public LoanResponseDto returnBook(Long sno, Long lno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        Optional<Loan> byLno = loanRepository.findById(lno);
+
+        if(bySno.isEmpty()) return null;
+        if(byLno.isEmpty()) return null;
+
+        LocalDate nowDate = LocalDate.now();
+
+        Loan updateLoan = byLno.get();
+
+        updateLoan.setNowRetDate(nowDate);
+
+        loanRepository.save(updateLoan);
+
+        return toDto(updateLoan);
+    }
+
 
     Loan toEntity(LoanRequestDto loanRequestDto){
         return Loan.builder()

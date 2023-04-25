@@ -9,4 +9,6 @@ public interface LoanService {
     LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno);
 
     LoanResponseDto extension(Long sno,  Long lno);
+
+    LoanResponseDto returnBook(Long sno, Long lno);
 }
