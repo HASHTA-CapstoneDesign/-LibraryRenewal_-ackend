@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.book.dto;
 
+import hallym.hashtag.domain.book.entity.BookType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +24,6 @@ public class BookDto {
     private String pudDate;
 
     private Long bookPage;
+
+    private BookType bookType;
 }

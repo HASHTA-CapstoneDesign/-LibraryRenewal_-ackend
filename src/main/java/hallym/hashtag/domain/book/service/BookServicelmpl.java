@@ -69,6 +69,7 @@ public class BookServicelmpl implements BookService {
                 .isbn(bookDto.getIsbn())
                 .pudDate(bookDto.getPudDate())
                 .bookPage(bookDto.getBookPage())
+                .bookType(bookDto.getBookType())
                 .build();
     }
 
@@ -81,6 +82,7 @@ public class BookServicelmpl implements BookService {
                 .isbn(book.getIsbn())
                 .pudDate(book.getPudDate())
                 .bookPage(book.getBookPage())
+                .bookType(book.getBookType())
                 .build();
     }
 }
