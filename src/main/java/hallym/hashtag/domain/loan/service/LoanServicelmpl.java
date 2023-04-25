@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -79,6 +81,15 @@ public class LoanServicelmpl implements LoanService {
         return toDto(updateLoan);
     }
 
+    @Override
+    public List<LoanResponseDto> FindAllByStudent(Long sno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty()) return null;
+
+        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+        return getLoanList(loanList);
+    }
+
 
     Loan toEntity(LoanRequestDto loanRequestDto){
         return Loan.builder()
@@ -98,6 +109,10 @@ public class LoanServicelmpl implements LoanService {
                 .retDate(loan.getRetDate())
                 .NowRetDate(loan.getNowRetDate())
                 .build();
+    }
+
+    public List<LoanResponseDto> getLoanList(List<Loan> all) {
+        return all.stream().map(loan -> toDto(loan)).collect(Collectors.toList());
     }
 
 

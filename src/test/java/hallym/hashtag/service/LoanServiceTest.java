@@ -37,4 +37,11 @@ public class LoanServiceTest {
 
         loanService.returnBook(sno, lno);
     }
+
+    @Test
+    public void loanFindAllStudent() {
+        Long sno = 1L;
+
+        loanService.FindAllByStudent(sno);
+    }
 }

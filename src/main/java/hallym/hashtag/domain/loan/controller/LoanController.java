@@ -6,6 +6,8 @@ import hallym.hashtag.domain.loan.service.LoanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("student/loan")
@@ -30,5 +32,10 @@ public class LoanController {
     public LoanResponseDto loanReturn(@PathVariable(name = "sno") Long sno,
                                       @PathVariable(name = "lno") Long lno) {
         return loanService.returnBook(sno, lno);
+    }
+
+    @GetMapping("{sno}")
+    public List<LoanResponseDto> loanFindAllStudent(@PathVariable(name = "sno") Long sno) {
+        return loanService.FindAllByStudent(sno);
     }
 }

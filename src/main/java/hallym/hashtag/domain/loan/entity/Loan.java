@@ -48,4 +48,6 @@ public class Loan {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sno")
     private Student student;
+
+
 }

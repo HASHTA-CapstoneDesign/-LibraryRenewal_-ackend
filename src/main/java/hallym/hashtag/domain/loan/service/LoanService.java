@@ -3,6 +3,8 @@ package hallym.hashtag.domain.loan.service;
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 
+import java.util.List;
+
 
 public interface LoanService {
 
@@ -11,4 +13,6 @@ public interface LoanService {
     LoanResponseDto extension(Long sno,  Long lno);
 
     LoanResponseDto returnBook(Long sno, Long lno);
+
+    List<LoanResponseDto> FindAllByStudent(Long sno);
 }
