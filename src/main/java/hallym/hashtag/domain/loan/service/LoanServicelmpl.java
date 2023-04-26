@@ -34,23 +34,23 @@ public class LoanServicelmpl implements LoanService {
         if(byAbno.isEmpty()) return null;
         if(bySno.isEmpty()) return null;
 
-        loanRequestDto.setABook(byAbno.get());
-        loanRequestDto.setStudent(bySno.get());
-        loanRequestDto.setBook(byBno);
+        Loan loan = toEntity(loanRequestDto);
+
+        loan.setABook(byAbno.get());
+        loan.setStudent(bySno.get());
+        loan.setBook(byBno);
 
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
-        loanRequestDto.setRetDate(retDate);
-
-        Loan newLoan = toEntity(loanRequestDto);
+        loan.setRetDate(retDate);
 
         ABook aBook = byAbno.get();
 
         aBook.setLoanType(Boolean.TRUE);
 
         aBookRepository.save(aBook);
-        loanRepository.save(newLoan);
-        return toDto(newLoan);
+        loanRepository.save(loan);
+        return toDto(loan);
     }
 
     @Override

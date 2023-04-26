@@ -39,7 +39,7 @@ public class Book extends BaseEntity {
 
     @Builder.Default
     @JsonManagedReference
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Loan> loans = new ArrayList<>();
 
     public void updateBook(Book book) {

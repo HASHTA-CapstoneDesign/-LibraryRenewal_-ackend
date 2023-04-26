@@ -46,7 +46,7 @@ public class Loan {
     private ABook aBook;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "bno")
     private Book book;
 
@@ -55,5 +55,12 @@ public class Loan {
     @JoinColumn(name = "sno")
     private Student student;
 
+    public void setBook(Book book) {
+        if(this.book != null) {
+            this.book.getLoans().remove(this);
+        }
+        this.book = book;
+        book.getLoans().add(this);
+    }
 
 }
