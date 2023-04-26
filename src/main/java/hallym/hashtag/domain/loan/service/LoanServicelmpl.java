@@ -82,12 +82,22 @@ public class LoanServicelmpl implements LoanService {
     }
 
     @Override
-    public List<LoanResponseDto> FindAllByStudent(Long sno) {
+    public List<LoanResponseDto> findAllByStudent(Long sno) {
         Optional<Student> bySno = studentRepository.findById(sno);
         if(bySno.isEmpty()) return null;
 
         List<Loan> loanList = loanRepository.findByStudent_sno(sno);
         return getLoanList(loanList);
+    }
+
+    @Override
+    public List<LoanResponseDto> findAllByABook(Long abno) {
+        Optional<ABook> byAbno = aBookRepository.findById(abno);
+        if(byAbno.isEmpty()) return null;
+
+        List<Loan> findLaon = loanRepository.findByABook_abno(abno);
+
+        return getLoanList(findLaon);
     }
 
 

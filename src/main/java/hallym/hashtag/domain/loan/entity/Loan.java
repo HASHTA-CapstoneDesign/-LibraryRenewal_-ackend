@@ -45,7 +45,7 @@ public class Loan {
     private ABook aBook;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sno")
     private Student student;
 

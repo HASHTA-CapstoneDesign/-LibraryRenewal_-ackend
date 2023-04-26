@@ -14,5 +14,7 @@ public interface LoanService {
 
     LoanResponseDto returnBook(Long sno, Long lno);
 
-    List<LoanResponseDto> FindAllByStudent(Long sno);
+    List<LoanResponseDto> findAllByStudent(Long sno);
+
+    List<LoanResponseDto> findAllByABook(Long bno);
 }

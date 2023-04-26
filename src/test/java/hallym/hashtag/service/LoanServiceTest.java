@@ -2,6 +2,7 @@ package hallym.hashtag.service;
 
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.service.LoanService;
+import hallym.hashtag.domain.loan.service.LoanServicelmpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +14,7 @@ public class LoanServiceTest {
 
     @Test
     public void loanCreate() {
-        Long abno = 1L;
+        Long abno = 2L;
         Long sno = 1L;
 
         LoanRequestDto loanRequestDto = LoanRequestDto.builder()
@@ -42,6 +43,13 @@ public class LoanServiceTest {
     public void loanFindAllStudent() {
         Long sno = 1L;
 
-        loanService.FindAllByStudent(sno);
+        loanService.findAllByStudent(sno);
+    }
+
+    @Test
+    public void loanFindbyABook() {
+        Long abno = 1L;
+
+        loanService.findAllByABook(abno);
     }
 }

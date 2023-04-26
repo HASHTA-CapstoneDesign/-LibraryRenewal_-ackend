@@ -34,8 +34,13 @@ public class LoanController {
         return loanService.returnBook(sno, lno);
     }
 
-    @GetMapping("{sno}")
+    @GetMapping("student/{sno}")
     public List<LoanResponseDto> loanFindAllStudent(@PathVariable(name = "sno") Long sno) {
-        return loanService.FindAllByStudent(sno);
+        return loanService.findAllByStudent(sno);
+    }
+
+    @GetMapping("abook/{abno}")
+    public List<LoanResponseDto> loanFindAllABook(@PathVariable(name = "abno") Long abno) {
+        return loanService.findAllByABook(abno);
     }
 }
