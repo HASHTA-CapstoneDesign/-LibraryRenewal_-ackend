@@ -2,6 +2,7 @@ package hallym.hashtag.domain.loan.service;
 
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
+import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 import hallym.hashtag.domain.loan.entity.Loan;
@@ -28,12 +29,14 @@ public class LoanServicelmpl implements LoanService {
     public LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno) {
         Optional<ABook> byAbno = aBookRepository.findById(abno);
         Optional<Student> bySno = studentRepository.findById(sno);
+        Book byBno = byAbno.get().getBook();
 
         if(byAbno.isEmpty()) return null;
         if(bySno.isEmpty()) return null;
 
         loanRequestDto.setABook(byAbno.get());
         loanRequestDto.setStudent(bySno.get());
+        loanRequestDto.setBook(byBno);
 
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
@@ -100,7 +103,7 @@ public class LoanServicelmpl implements LoanService {
         if(bySno.isEmpty()) return null;
 
         List<Loan> loanList = loanRepository.findByStudent_sno(sno);
-        return getLoanList(loanList);
+        return loanList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -110,7 +113,7 @@ public class LoanServicelmpl implements LoanService {
 
         List<Loan> findLaon = loanRepository.findByABook_abno(abno);
 
-        return getLoanList(findLaon);
+        return findLaon.stream().map(this::toDto).collect(Collectors.toList());
     }
 
 
@@ -122,6 +125,7 @@ public class LoanServicelmpl implements LoanService {
                 .nowRetDate(loanRequestDto.getNowRetDate())
                 .aBook(loanRequestDto.getABook())
                 .student(loanRequestDto.getStudent())
+                .book(loanRequestDto.getBook())
                 .build();
     }
 
@@ -133,10 +137,5 @@ public class LoanServicelmpl implements LoanService {
                 .nowRetDate(loan.getNowRetDate())
                 .build();
     }
-
-    public List<LoanResponseDto> getLoanList(List<Loan> all) {
-        return all.stream().map(loan -> toDto(loan)).collect(Collectors.toList());
-    }
-
 
 }

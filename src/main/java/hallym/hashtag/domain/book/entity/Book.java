@@ -1,13 +1,16 @@
 package hallym.hashtag.domain.book.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -33,6 +36,11 @@ public class Book extends BaseEntity {
     private Long bookPage;
 
     private BookType bookType;
+
+    @Builder.Default
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    private List<Loan> loans = new ArrayList<>();
 
     public void updateBook(Book book) {
 //        BeanUtils.copyProperties(book, this);
