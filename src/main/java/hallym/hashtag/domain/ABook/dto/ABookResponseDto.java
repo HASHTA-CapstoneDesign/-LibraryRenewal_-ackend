@@ -13,4 +13,6 @@ public class ABookResponseDto {
     private Long abno;
 
     private String tag;
+
+    private boolean loanType;
 }

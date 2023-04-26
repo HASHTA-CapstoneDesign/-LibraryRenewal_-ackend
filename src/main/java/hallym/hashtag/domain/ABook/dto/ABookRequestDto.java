@@ -16,4 +16,6 @@ public class ABookRequestDto {
     private String tag;
 
     private Book book;
+
+    private boolean loanType;
 }

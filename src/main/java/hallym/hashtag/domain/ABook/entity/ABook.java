@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -25,4 +26,7 @@ public class ABook extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bno")
     private Book book;
+
+    @ColumnDefault("true")
+    private boolean loanType; //대출여부 1:대출중, 0:대출가능
 }
