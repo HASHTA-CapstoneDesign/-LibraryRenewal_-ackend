@@ -106,7 +106,7 @@ public class LoanServicelmpl implements LoanService {
                 .lno(loanRequestDto.getLno())
                 .creDate(loanRequestDto.getCreDate())
                 .retDate(loanRequestDto.getRetDate())
-                .NowRetDate(loanRequestDto.getNowRetDate())
+                .nowRetDate(loanRequestDto.getNowRetDate())
                 .aBook(loanRequestDto.getABook())
                 .student(loanRequestDto.getStudent())
                 .build();
@@ -117,7 +117,7 @@ public class LoanServicelmpl implements LoanService {
                 .lno(loan.getLno())
                 .creDate(loan.getCreDate())
                 .retDate(loan.getRetDate())
-                .NowRetDate(loan.getNowRetDate())
+                .nowRetDate(loan.getNowRetDate())
                 .build();
     }
 

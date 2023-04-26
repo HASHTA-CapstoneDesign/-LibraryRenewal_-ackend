@@ -36,8 +36,10 @@ public class Loan {
     private LocalDate retDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "NowRetDate")
-    private LocalDate NowRetDate;
+    @Column(name = "nowRetDate")
+    private LocalDate nowRetDate;
+
+    private Boolean loanType;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)

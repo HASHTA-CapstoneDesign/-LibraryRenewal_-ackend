@@ -18,5 +18,5 @@ public class LoanResponseDto {
 
     private LocalDate retDate;
 
-    private LocalDate NowRetDate;
+    private LocalDate nowRetDate;
 }

@@ -20,7 +20,7 @@ public class LoanRequestDto {
 
     private LocalDate retDate;
 
-    private LocalDate NowRetDate;
+    private LocalDate nowRetDate;
 
     private ABook aBook;
 
