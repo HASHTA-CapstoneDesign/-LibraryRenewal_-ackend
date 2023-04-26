@@ -40,9 +40,14 @@ public class LoanRepositoryTest {
     @Test
     public void testFindByStudent() {
         Long sno = 1L;
-
         List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+        System.out.println(loanList.size());
+    }
 
+    @Test
+    public void testFindByABook() {
+        Long abno = 1L;
+        List<Loan> loanList = loanRepository.findByABook_abno(abno);
         System.out.println(loanList.size());
     }
 
