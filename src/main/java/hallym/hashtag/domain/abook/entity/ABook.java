@@ -1,4 +1,4 @@
-package hallym.hashtag.domain.ABook.entity;
+package hallym.hashtag.domain.abook.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.book.entity.Book;
@@ -27,7 +27,7 @@ public class ABook extends BaseEntity {
     @JoinColumn(name = "bno")
     private Book book;
 
-    @ColumnDefault("true")
+    @ColumnDefault("false")
     private boolean loanType; //대출여부 1:대출중, 0:대출가능
 
     public void setLoanType(Boolean loanType) {

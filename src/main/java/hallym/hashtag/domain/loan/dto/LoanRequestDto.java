@@ -1,6 +1,6 @@
 package hallym.hashtag.domain.loan.dto;
 
-import hallym.hashtag.domain.ABook.entity.ABook;
+import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

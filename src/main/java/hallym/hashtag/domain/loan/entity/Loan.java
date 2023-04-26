@@ -1,7 +1,7 @@
 package hallym.hashtag.domain.loan.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hallym.hashtag.domain.ABook.entity.ABook;
+import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,8 +38,6 @@ public class Loan {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "nowRetDate")
     private LocalDate nowRetDate;
-
-    private Boolean loanType;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)

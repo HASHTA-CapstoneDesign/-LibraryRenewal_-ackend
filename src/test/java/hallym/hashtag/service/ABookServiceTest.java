@@ -1,10 +1,12 @@
 package hallym.hashtag.service;
 
-import hallym.hashtag.domain.ABook.dto.ABookRequestDto;
-import hallym.hashtag.domain.ABook.service.ABookService;
+import hallym.hashtag.domain.abook.dto.ABookRequestDto;
+import hallym.hashtag.domain.abook.service.ABookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.stream.IntStream;
 
 @SpringBootTest
 public class ABookServiceTest {
@@ -12,18 +14,22 @@ public class ABookServiceTest {
     ABookService aBookService;
 
     @Test
-    public void AbookCreate() {
+    public void ABookCreate() {
         Long bno = 1L;
-        ABookRequestDto aBookRequestDto = ABookRequestDto.builder()
-                .tag("tag1").build();
 
-        aBookService.create(bno, aBookRequestDto);
+        IntStream.rangeClosed(1,5).forEach(i -> {
+            ABookRequestDto aBookRequestDto = ABookRequestDto.builder()
+                    .tag("tag1").build();
+            aBookService.create(bno, aBookRequestDto);
+        });
         System.out.println("----------저장 완료!----------");
     }
 
     @Test
-    public void ABookCheckOut() {
-        Long abno = 3L;
-        aBookService.checkOut(abno);
+    public void ABookFindAllByBno() {
+        Long bno = 1L;
+
+        aBookService.findAllByBook(bno);
     }
+
 }

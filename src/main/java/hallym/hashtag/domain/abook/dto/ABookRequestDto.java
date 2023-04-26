@@ -1,5 +1,6 @@
-package hallym.hashtag.domain.ABook.dto;
+package hallym.hashtag.domain.abook.dto;
 
+import hallym.hashtag.domain.book.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,10 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ABookResponseDto {
+public class ABookRequestDto {
     private Long abno;
 
     private String tag;
+
+    private Book book;
 
     private boolean loanType;
 }

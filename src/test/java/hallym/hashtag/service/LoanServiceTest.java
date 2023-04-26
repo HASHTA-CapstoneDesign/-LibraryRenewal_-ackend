@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+
 @SpringBootTest
 public class LoanServiceTest {
     @Autowired
@@ -14,13 +17,14 @@ public class LoanServiceTest {
 
     @Test
     public void loanCreate() {
-        Long abno = 2L;
         Long sno = 1L;
 
-        LoanRequestDto loanRequestDto = LoanRequestDto.builder()
-                .build();
+        LongStream.rangeClosed(1,3).forEach(i -> {
+            LoanRequestDto loanRequestDto = LoanRequestDto.builder()
+                    .build();
+            loanService.create(loanRequestDto, sno, i);
+        });
 
-        loanService.create(loanRequestDto, sno, abno);
     }
 
     @Test

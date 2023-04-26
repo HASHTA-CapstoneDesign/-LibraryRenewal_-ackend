@@ -1,7 +1,7 @@
 package hallym.hashtag.domain.loan.service;
 
-import hallym.hashtag.domain.ABook.entity.ABook;
-import hallym.hashtag.domain.ABook.repostory.ABookRepository;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 import hallym.hashtag.domain.loan.entity.Loan;
@@ -40,6 +40,12 @@ public class LoanServicelmpl implements LoanService {
         loanRequestDto.setRetDate(retDate);
 
         Loan newLoan = toEntity(loanRequestDto);
+
+        ABook aBook = byAbno.get();
+
+        aBook.setLoanType(Boolean.TRUE);
+
+        aBookRepository.save(aBook);
         loanRepository.save(newLoan);
         return toDto(newLoan);
     }
@@ -77,6 +83,13 @@ public class LoanServicelmpl implements LoanService {
 
         updateLoan.setNowRetDate(nowDate);
 
+        Optional<ABook> byAbno = aBookRepository.findById(byLno.get().getABook().getAbno());
+
+        ABook aBook = byAbno.get();
+
+        aBook.setLoanType(Boolean.FALSE);
+
+        aBookRepository.save(aBook);
         loanRepository.save(updateLoan);
         return toDto(updateLoan);
     }

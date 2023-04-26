@@ -1,19 +1,18 @@
-package hallym.hashtag.domain.ABook.service;
+package hallym.hashtag.domain.abook.service;
 
-import hallym.hashtag.domain.ABook.dto.ABookRequestDto;
-import hallym.hashtag.domain.ABook.dto.ABookResponseDto;
-import hallym.hashtag.domain.ABook.entity.ABook;
-import hallym.hashtag.domain.ABook.repostory.ABookRepository;
+import hallym.hashtag.domain.abook.dto.ABookRequestDto;
+import hallym.hashtag.domain.abook.dto.ABookResponseDto;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.book.repository.BookRepository;
-import hallym.hashtag.domain.loan.entity.Loan;
-import hallym.hashtag.domain.loan.repostory.LoanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -21,11 +20,11 @@ import java.util.Optional;
 public class ABookServicelmpl implements ABookService {
     private final ABookRepository aBookRepository;
     private final BookRepository bookRepository;
-    private final LoanRepository loanRepository;
 
     @Override
     public ABookResponseDto create(Long bno, ABookRequestDto aBookRequestDto) {
         Optional<Book> byId = bookRepository.findById(bno);
+        if(byId.isEmpty()) return null;
         aBookRequestDto.setBook(byId.get());
         ABook newABook = toEntity(aBookRequestDto);
         aBookRepository.save(newABook);
@@ -33,32 +32,27 @@ public class ABookServicelmpl implements ABookService {
     }
 
     @Override
-    public ABookResponseDto checkOut(Long bno) {
-        Optional<ABook> byAbno = aBookRepository.findById(bno);
-        if(byAbno.isEmpty()) return null;
+    public List<ABookResponseDto> findAllByBook(Long bno) {
+        Optional<Book> byBno = bookRepository.findById(bno);
+        if(byBno.isEmpty()) return null;
 
-        ABook checkOutAbook = byAbno.get();
+        List<ABook> aBookList = aBookRepository.findByBook_bno(bno);
 
-        List<Loan> loanList = loanRepository.findByABook_abno(bno);
-
-        if(loanList.size() > 0) {
-            checkOutAbook.setLoanType(Boolean.FALSE);
-            aBookRepository.save(checkOutAbook);
-        }
-
-        return toDto(checkOutAbook);
+        return aBookList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public ABook toEntity(ABookRequestDto aBookRequestDto){
         return ABook.builder()
                 .abno(aBookRequestDto.getAbno())
                 .tag(aBookRequestDto.getTag())
+                .loanType(aBookRequestDto.isLoanType())
                 .book(aBookRequestDto.getBook()).build();
     }
 
     public ABookResponseDto toDto(ABook aBook){
         return ABookResponseDto.builder()
                 .abno(aBook.getAbno())
+                .loanType(aBook.isLoanType())
                 .tag(aBook.getTag()).build();
     }
 }

@@ -1,7 +1,7 @@
 package hallym.hashtag.repository;
 
-import hallym.hashtag.domain.ABook.entity.ABook;
-import hallym.hashtag.domain.ABook.repostory.ABookRepository;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
 import hallym.hashtag.domain.student.entity.Student;
