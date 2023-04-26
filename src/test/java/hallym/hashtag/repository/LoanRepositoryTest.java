@@ -1,7 +1,7 @@
 package hallym.hashtag.repository;
 
-import hallym.hashtag.domain.ABook.entity.ABook;
-import hallym.hashtag.domain.ABook.repostory.ABookRepository;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
 import hallym.hashtag.domain.student.entity.Student;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -34,6 +35,20 @@ public class LoanRepositoryTest {
                 .retDate(retDate)
                 .build();
         loanRepository.save(loan);
+    }
+
+    @Test
+    public void testFindByStudent() {
+        Long sno = 1L;
+        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+        System.out.println(loanList.size());
+    }
+
+    @Test
+    public void testFindByABook() {
+        Long abno = 1L;
+        List<Loan> loanList = loanRepository.findByABook_abno(abno);
+        System.out.println(loanList.size());
     }
 
 }

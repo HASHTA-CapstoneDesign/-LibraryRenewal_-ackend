@@ -1,7 +1,8 @@
 package hallym.hashtag.domain.loan.service;
 
-import hallym.hashtag.domain.ABook.entity.ABook;
-import hallym.hashtag.domain.ABook.repostory.ABookRepository;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
+import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 import hallym.hashtag.domain.loan.entity.Loan;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -26,25 +29,103 @@ public class LoanServicelmpl implements LoanService {
     public LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno) {
         Optional<ABook> byAbno = aBookRepository.findById(abno);
         Optional<Student> bySno = studentRepository.findById(sno);
-        loanRequestDto.setABook(byAbno.get());
-        loanRequestDto.setStudent(bySno.get());
+        Book byBno = byAbno.get().getBook();
+
+        if(byAbno.isEmpty()) return null;
+        if(bySno.isEmpty()) return null;
+
+        Loan loan = toEntity(loanRequestDto);
+
+        loan.setABook(byAbno.get());
+        loan.setStudent(bySno.get());
+        loan.setBook(byBno);
 
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
-        loanRequestDto.setRetDate(retDate);
+        loan.setRetDate(retDate);
 
-        Loan newLoan = toEntity(loanRequestDto);
-        loanRepository.save(newLoan);
-        return toDto(newLoan);
+        ABook aBook = byAbno.get();
+
+        aBook.setLoanType(Boolean.TRUE);
+
+        aBookRepository.save(aBook);
+        loanRepository.save(loan);
+        return toDto(loan);
     }
+
+    @Override
+    public LoanResponseDto extension(Long sno, Long lno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        Optional<Loan> byLno = loanRepository.findById(lno);
+
+        if(bySno.isEmpty()) return null;
+        if(byLno.isEmpty()) return null;
+
+        LocalDate Date = byLno.get().getRetDate();
+        LocalDate retDate = Date.plusDays(7);
+
+        Loan updateLoan = byLno.get();
+
+        updateLoan.setRetDate(retDate);
+
+        loanRepository.save(updateLoan);
+        return toDto(updateLoan);
+    }
+
+    @Override
+    public LoanResponseDto returnBook(Long sno, Long lno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        Optional<Loan> byLno = loanRepository.findById(lno);
+
+        if(bySno.isEmpty()) return null;
+        if(byLno.isEmpty()) return null;
+
+        LocalDate nowDate = LocalDate.now();
+
+        Loan updateLoan = byLno.get();
+
+        updateLoan.setNowRetDate(nowDate);
+
+        Optional<ABook> byAbno = aBookRepository.findById(byLno.get().getABook().getAbno());
+
+        ABook aBook = byAbno.get();
+
+        aBook.setLoanType(Boolean.FALSE);
+
+        aBookRepository.save(aBook);
+        loanRepository.save(updateLoan);
+        return toDto(updateLoan);
+    }
+
+    @Override
+    public List<LoanResponseDto> findAllByStudent(Long sno) {
+        Optional<Student> bySno = studentRepository.findById(sno);
+        if(bySno.isEmpty()) return null;
+
+        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+        return loanList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LoanResponseDto> findAllByABook(Long abno) {
+        Optional<ABook> byAbno = aBookRepository.findById(abno);
+        if(byAbno.isEmpty()) return null;
+
+        List<Loan> findLaon = loanRepository.findByABook_abno(abno);
+
+        return findLaon.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
 
     Loan toEntity(LoanRequestDto loanRequestDto){
         return Loan.builder()
                 .lno(loanRequestDto.getLno())
                 .creDate(loanRequestDto.getCreDate())
                 .retDate(loanRequestDto.getRetDate())
+                .nowRetDate(loanRequestDto.getNowRetDate())
                 .aBook(loanRequestDto.getABook())
                 .student(loanRequestDto.getStudent())
+                .book(loanRequestDto.getBook())
                 .build();
     }
 
@@ -53,8 +134,8 @@ public class LoanServicelmpl implements LoanService {
                 .lno(loan.getLno())
                 .creDate(loan.getCreDate())
                 .retDate(loan.getRetDate())
+                .nowRetDate(loan.getNowRetDate())
                 .build();
     }
-
 
 }

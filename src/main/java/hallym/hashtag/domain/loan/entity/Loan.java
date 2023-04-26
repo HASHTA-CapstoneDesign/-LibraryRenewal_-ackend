@@ -1,7 +1,8 @@
 package hallym.hashtag.domain.loan.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hallym.hashtag.domain.ABook.entity.ABook;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 @Entity
-@Table(name = "Loan")
+@Table(name = "loan")
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(value = { AuditingEntityListener.class })
@@ -35,13 +36,31 @@ public class Loan {
     @Column(name = "retDate")
     private LocalDate retDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "nowRetDate")
+    private LocalDate nowRetDate;
+
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "abno")
     private ABook aBook;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bno")
+    private Book book;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sno")
     private Student student;
+
+    public void setBook(Book book) {
+        if(this.book != null) {
+            this.book.getLoans().remove(this);
+        }
+        this.book = book;
+        book.getLoans().add(this);
+    }
+
 }

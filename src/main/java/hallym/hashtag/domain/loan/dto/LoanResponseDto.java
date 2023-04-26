@@ -17,4 +17,7 @@ public class LoanResponseDto {
     private LocalDate creDate;
 
     private LocalDate retDate;
+
+    private LocalDate nowRetDate;
+
 }

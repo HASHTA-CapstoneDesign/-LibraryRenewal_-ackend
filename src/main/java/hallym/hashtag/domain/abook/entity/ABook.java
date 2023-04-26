@@ -1,12 +1,10 @@
-package hallym.hashtag.domain.ABook.entity;
+package hallym.hashtag.domain.abook.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.global.baseEntity.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -16,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "abook")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 public class ABook extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +26,11 @@ public class ABook extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bno")
     private Book book;
+
+    @ColumnDefault("false")
+    private boolean loanType; //대출여부 1:대출중, 0:대출가능
+
+    public void setLoanType(Boolean loanType) {
+        this.loanType = loanType;
+    }
 }
