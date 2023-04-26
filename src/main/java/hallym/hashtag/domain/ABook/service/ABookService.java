@@ -5,4 +5,6 @@ import hallym.hashtag.domain.ABook.dto.ABookResponseDto;
 
 public interface ABookService {
     ABookResponseDto create(Long bno, ABookRequestDto aBookRequestDto);
+
+    ABookResponseDto checkOut(Long bno);
 }

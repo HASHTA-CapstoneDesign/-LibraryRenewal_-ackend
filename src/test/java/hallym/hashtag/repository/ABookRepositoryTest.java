@@ -26,4 +26,12 @@ public class ABookRepositoryTest {
                 .build();
         aBookRepository.save(aBook);
     }
+
+    @Test
+    public void testSetLoanType() {
+        Optional<ABook> byAbno = aBookRepository.findById(2L);
+        ABook aBook = byAbno.get();
+        aBook.setLoanType(Boolean.FALSE);
+        aBookRepository.save(aBook);
+    }
 }

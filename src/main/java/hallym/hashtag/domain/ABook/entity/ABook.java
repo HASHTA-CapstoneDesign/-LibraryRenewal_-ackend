@@ -29,4 +29,8 @@ public class ABook extends BaseEntity {
 
     @ColumnDefault("true")
     private boolean loanType; //대출여부 1:대출중, 0:대출가능
+
+    public void setLoanType(Boolean loanType) {
+        this.loanType = loanType;
+    }
 }

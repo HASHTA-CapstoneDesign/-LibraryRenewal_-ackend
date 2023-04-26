@@ -20,4 +20,10 @@ public class ABookServiceTest {
         aBookService.create(bno, aBookRequestDto);
         System.out.println("----------저장 완료!----------");
     }
+
+    @Test
+    public void ABookCheckOut() {
+        Long abno = 3L;
+        aBookService.checkOut(abno);
+    }
 }
