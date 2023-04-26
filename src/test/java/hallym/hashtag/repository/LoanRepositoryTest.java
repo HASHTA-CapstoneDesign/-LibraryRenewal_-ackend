@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -34,6 +35,15 @@ public class LoanRepositoryTest {
                 .retDate(retDate)
                 .build();
         loanRepository.save(loan);
+    }
+
+    @Test
+    public void testFindByStudent() {
+        Long sno = 1L;
+
+        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+
+        System.out.println(loanList.size());
     }
 
 }
