@@ -72,4 +72,9 @@ public class BookRepositoryTest {
 
         assertThat(book.getLoans().size()).isEqualTo(1);
     }
+
+    @Test
+    public void testFindAllRegDateDesc() {
+        bookRepository.findAllRegDateDesc();
+    }
 }

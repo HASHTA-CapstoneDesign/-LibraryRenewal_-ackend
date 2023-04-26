@@ -37,4 +37,9 @@ public class BookController {
     public String bookDelete(@PathVariable(name = "bno") Long bno){
         return bookService.delete(bno);
     }
+
+    @GetMapping("recent")
+    public List<BookDto> bookFindAllRegDateDesc() {
+        return bookService.findAllRestDateDesc();
+    }
 }

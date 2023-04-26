@@ -27,7 +27,7 @@ public class BookServicelmpl implements BookService {
     @Override
     public List<BookDto> findAll() {
         List<Book> bookList = bookRepository.findAll();
-        return bookList.stream().map(s -> toDto(s)).collect(Collectors.toList());
+        return bookList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -58,6 +58,12 @@ public class BookServicelmpl implements BookService {
         Book book = byBno.get();
         bookRepository.delete(book);
         return "삭제되었습니다.";
+    }
+
+    @Override
+    public List<BookDto> findAllRestDateDesc() {
+        List<Book> bookList = bookRepository.findAllRegDateDesc();
+        return bookList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Book toEntity(BookDto bookDto) {

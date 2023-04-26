@@ -14,4 +14,6 @@ public interface BookService {
     BookDto update(Long bno, BookDto bookDto);
 
     String delete(Long bno);
+
+    List<BookDto> findAllRestDateDesc();
 }
