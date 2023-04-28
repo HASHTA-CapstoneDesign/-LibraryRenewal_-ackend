@@ -50,4 +50,11 @@ public class Loan {
     @JoinColumn(name = "sno")
     private Student student;
 
+    public void setStudent(Student student) {
+        if(this.student != null)
+            this.student.getLoans().remove(this);
+        this.student = student;
+        student.getLoans().add(this);
+    }
+
 }
