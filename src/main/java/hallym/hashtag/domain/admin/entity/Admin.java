@@ -1,6 +1,5 @@
 package hallym.hashtag.domain.admin.entity;
 
-import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
