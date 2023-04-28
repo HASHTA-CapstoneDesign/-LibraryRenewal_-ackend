@@ -29,7 +29,7 @@ public class StudentServicelmpl implements StudentService {
     @Override
     public List<StudentResponseDto> findAllList() {
         List<Student> studentList = studentRepository.findAll();
-        return studentList.stream().map(s -> toDto(s)).collect(Collectors.toList());
+        return studentList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -68,8 +68,7 @@ public class StudentServicelmpl implements StudentService {
         Optional<Student> bySno = studentRepository.findById(sno);
         if(bySno.isEmpty())
             return "ID가 없습니다.";
-        Student student = bySno.get();
-        studentRepository.delete(student);
+        studentRepository.deleteById(sno);
         return "삭제되었습니다.";
     }
 
