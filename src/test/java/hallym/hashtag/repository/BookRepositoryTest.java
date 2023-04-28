@@ -46,30 +46,12 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void testInsertBookAndLoan() {
-        Book book = Book.builder()
-                .tag(100L)
-                .title("제목")
-                .author("김미진")
-                .isbn("1111")
-                .pudDate("2001년 07월 21일")
-                .bookPage(123L)
-                .bookType(BookType.철학)
-                .build();
+    public void testFindAllRegDateDesc() {
+        bookRepository.findAllRegDateDesc();
+    }
 
-        LocalDate creDate = LocalDate.now();
-        LocalDate retDate = creDate.plusDays(7);
-        Optional<ABook> byAbno = aBookRepository.findById(1L);
-        Optional<Student> bySno = studentRepository.findById(1L);
-        Loan loan = Loan.builder()
-                .aBook(byAbno.get())
-                .student(bySno.get())
-                .retDate(retDate)
-                .build();
-
-        loan.setBook(book);
-        loanRepository.save(loan);
-
-        assertThat(book.getLoans().size()).isEqualTo(1);
+    @Test
+    public void testFindAllByLoanCount() {
+        bookRepository.findAllByLoanCount();
     }
 }

@@ -61,4 +61,14 @@ public class BookServiceTest {
         bookService.delete(bno);
         System.out.println("----------삭제 완료!----------");
     }
+
+    @Test
+    public void bookFindAllRegDateDesc() {
+        bookService.findAllRestDateDesc();
+    }
+
+    @Test
+    public void bookFindAllLoanCount() {
+        bookService.findAllByLoanCount();
+    }
 }
