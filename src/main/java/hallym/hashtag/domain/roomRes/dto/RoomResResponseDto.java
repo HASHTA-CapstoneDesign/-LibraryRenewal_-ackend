@@ -1,7 +1,5 @@
 package hallym.hashtag.domain.roomRes.dto;
 
-import hallym.hashtag.domain.roomRes.entity.Floor;
-import hallym.hashtag.domain.roomRes.entity.RoomName;
 import hallym.hashtag.domain.roomRes.entity.Time;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +22,7 @@ public class RoomResResponseDto {
 
     private Time time;
 
-    private Floor floor;
-
-    private RoomName roomName;
+    private String roomName;
 
     @ColumnDefault("false")
     private boolean reserve;

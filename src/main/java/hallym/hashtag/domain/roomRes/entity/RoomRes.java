@@ -41,7 +41,5 @@ public class RoomRes {
 
     private Time time;
 
-    private Floor floor;
-
-    private RoomName roomName;
+    private String roomName;
 }
