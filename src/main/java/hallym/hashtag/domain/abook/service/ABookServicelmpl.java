@@ -46,7 +46,8 @@ public class ABookServicelmpl implements ABookService {
                 .abno(aBookRequestDto.getAbno())
                 .tag(aBookRequestDto.getTag())
                 .loanType(aBookRequestDto.isLoanType())
-                .book(aBookRequestDto.getBook()).build();
+                .book(aBookRequestDto.getBook())
+                .build();
     }
 
     public ABookResponseDto toDto(ABook aBook){

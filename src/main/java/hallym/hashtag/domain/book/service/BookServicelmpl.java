@@ -83,6 +83,7 @@ public class BookServicelmpl implements BookService {
                 .bookPage(bookDto.getBookPage())
                 .bookType(bookDto.getBookType())
                 .loanCount(bookDto.getLoanCount())
+                .aBooks(bookDto.getABooks())
                 .build();
     }
 
@@ -97,6 +98,7 @@ public class BookServicelmpl implements BookService {
                 .bookPage(book.getBookPage())
                 .bookType(book.getBookType())
                 .loanCount(book.getLoanCount())
+                .aBooks(book.getABooks())
                 .build();
     }
 }

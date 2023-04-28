@@ -2,9 +2,11 @@ package hallym.hashtag.domain.student.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import hallym.hashtag.domain.loan.entity.Loan;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,4 +26,6 @@ public class StudentRequestDto {
     private String password;
 
     private Boolean deleted;
+
+    private List<Loan> loans;
 }

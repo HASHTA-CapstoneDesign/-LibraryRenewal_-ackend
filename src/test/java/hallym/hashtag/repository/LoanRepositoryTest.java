@@ -50,5 +50,4 @@ public class LoanRepositoryTest {
         List<Loan> loanList = loanRepository.findByABook_abno(abno);
         System.out.println(loanList.size());
     }
-
 }
