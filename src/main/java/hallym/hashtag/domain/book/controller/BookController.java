@@ -42,4 +42,9 @@ public class BookController {
     public List<BookDto> bookFindAllRegDateDesc() {
         return bookService.findAllRestDateDesc();
     }
+
+    @GetMapping("popular")
+    public List<BookDto> bookFindAllLoanCount() {
+        return bookService.findAllByLoanCount();
+    }
 }

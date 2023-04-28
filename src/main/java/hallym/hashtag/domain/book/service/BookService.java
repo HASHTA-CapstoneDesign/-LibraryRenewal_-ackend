@@ -16,4 +16,6 @@ public interface BookService {
     String delete(Long bno);
 
     List<BookDto> findAllRestDateDesc();
+
+    List<BookDto> findAllByLoanCount();
 }

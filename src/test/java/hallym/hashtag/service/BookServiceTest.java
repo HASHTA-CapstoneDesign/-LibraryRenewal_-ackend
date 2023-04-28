@@ -66,4 +66,9 @@ public class BookServiceTest {
     public void bookFindAllRegDateDesc() {
         bookService.findAllRestDateDesc();
     }
+
+    @Test
+    public void bookFindAllLoanCount() {
+        bookService.findAllByLoanCount();
+    }
 }

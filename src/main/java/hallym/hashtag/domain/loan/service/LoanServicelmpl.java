@@ -3,6 +3,7 @@ package hallym.hashtag.domain.loan.service;
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
+import hallym.hashtag.domain.book.repository.BookRepository;
 import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 import hallym.hashtag.domain.loan.entity.Loan;
@@ -25,6 +26,7 @@ public class LoanServicelmpl implements LoanService {
     private final ABookRepository aBookRepository;
     private final StudentRepository studentRepository;
     private final LoanRepository loanRepository;
+    private final BookRepository bookRepository;
     @Override
     public LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno) {
         Optional<ABook> byAbno = aBookRepository.findById(abno);
@@ -38,7 +40,6 @@ public class LoanServicelmpl implements LoanService {
 
         loan.setABook(byAbno.get());
         loan.setStudent(bySno.get());
-        loan.setBook(byBno);
 
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
@@ -48,6 +49,11 @@ public class LoanServicelmpl implements LoanService {
 
         aBook.setLoanType(Boolean.TRUE);
 
+        Book book = byAbno.get().getBook();
+        int loanCount = book.getLoanCount() + 1;
+        book.updateLoanCount(loanCount);
+
+        bookRepository.save(book);
         aBookRepository.save(aBook);
         loanRepository.save(loan);
         return toDto(loan);
@@ -125,7 +131,6 @@ public class LoanServicelmpl implements LoanService {
                 .nowRetDate(loanRequestDto.getNowRetDate())
                 .aBook(loanRequestDto.getABook())
                 .student(loanRequestDto.getStudent())
-                .book(loanRequestDto.getBook())
                 .build();
     }
 

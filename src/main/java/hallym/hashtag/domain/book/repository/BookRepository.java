@@ -12,4 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("select b from Book b order by b.regDate desc ")
     List<Book> findAllRegDateDesc();
 
+    @Query("select b from Book b order by b.loanCount desc")
+    List<Book> findAllByLoanCount();
+
 }

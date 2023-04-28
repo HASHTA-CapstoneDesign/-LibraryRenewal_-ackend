@@ -30,4 +30,6 @@ public class BookDto {
     private Long bookPage;
 
     private BookType bookType;
+
+    private int loanCount;
 }

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,9 +39,11 @@ public class Book extends BaseEntity {
     private BookType bookType;
 
     @Builder.Default
-    @JsonManagedReference
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<Loan> loans = new ArrayList<>();
+    private int loanCount = 0;
+
+    public void updateLoanCount(int loanCount) {
+        this.loanCount = loanCount;
+    }
 
     public void updateBook(Book book) {
 //        BeanUtils.copyProperties(book, this);
