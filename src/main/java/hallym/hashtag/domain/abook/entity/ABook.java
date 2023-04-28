@@ -33,4 +33,11 @@ public class ABook extends BaseEntity {
     public void setLoanType(Boolean loanType) {
         this.loanType = loanType;
     }
+
+    public void setBook(Book book) {
+        if(this.book != null)
+            this.book.getABooks().remove(this);
+        this.book = book;
+        book.getABooks().add(this);
+    }
 }
