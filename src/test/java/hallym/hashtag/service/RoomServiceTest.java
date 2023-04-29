@@ -18,6 +18,7 @@ public class RoomServiceTest {
                 .name("스터디룸")
                 .content("공부하는 곳이다.")
                 .floor(Floor.지상4층)
+                .studyRoom(Boolean.TRUE)
                 .build();
         roomService.create(roomDto);
     }
@@ -25,12 +26,17 @@ public class RoomServiceTest {
     @Test
     public void testSearch() {
         String name = "스터디";
-        roomService.search(name);
+        roomService.searchByAll(name);
     }
 
     @Test
     public void testSearchFail() {
         String name = "방";
-        roomService.search(name);
+        roomService.searchByAll(name);
+    }
+
+    @Test
+    public void SearchByStudyRoom() {
+        roomService.searchByStudy();
     }
 }

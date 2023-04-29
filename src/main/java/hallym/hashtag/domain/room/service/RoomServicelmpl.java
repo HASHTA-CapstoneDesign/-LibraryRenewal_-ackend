@@ -18,15 +18,22 @@ public class RoomServicelmpl implements RoomService{
 
     @Override
     public RoomDto create(RoomDto roomDto) {
-        roomRepository.save(toEntity(roomDto));
-        return roomDto;
+        Room room = toEntity(roomDto);
+        roomRepository.save(room);
+        return toDto(room);
     }
 
     @Override
-    public List<RoomDto> search(String name) {
+    public List<RoomDto> searchByAll(String name) {
         List<Room> roomList = roomRepository.findByNameContaining(name);
         if(roomList == null) return null;
         else return roomList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RoomDto> searchByStudy() {
+        List<Room> roomList = roomRepository.findAllByStudyRoom(Boolean.TRUE);
+        return roomList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Room toEntity(RoomDto roomDto) {
@@ -35,6 +42,7 @@ public class RoomServicelmpl implements RoomService{
                 .name(roomDto.getName())
                 .content(roomDto.getContent())
                 .floor(roomDto.getFloor())
+                .studyRoom(roomDto.isStudyRoom())
                 .build();
     }
 
@@ -44,6 +52,7 @@ public class RoomServicelmpl implements RoomService{
                 .name(room.getName())
                 .content(room.getContent())
                 .floor(room.getFloor())
+                .studyRoom(room.isStudyRoom())
                 .build();
     }
 }

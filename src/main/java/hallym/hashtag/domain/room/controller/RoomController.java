@@ -20,6 +20,11 @@ public class RoomController {
 
     @GetMapping
     public List<RoomDto> roomSearch(@RequestParam(value = "keyword") String keyword) {
-        return roomService.search(keyword);
+        return roomService.searchByAll(keyword);
+    }
+
+    @GetMapping("study")
+    public List<RoomDto> roomSearchByStudy() {
+        return roomService.searchByStudy();
     }
 }

@@ -18,4 +18,6 @@ public class RoomDto {
     private String name;
 
     private String content;
+
+    private boolean studyRoom;
 }

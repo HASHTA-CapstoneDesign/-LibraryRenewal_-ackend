@@ -23,4 +23,6 @@ public class Room {
     private String name;
 
     private String content;
+
+    private boolean studyRoom;
 }

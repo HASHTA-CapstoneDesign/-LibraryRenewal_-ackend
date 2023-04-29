@@ -7,5 +7,7 @@ import java.util.List;
 public interface RoomService {
     RoomDto create(RoomDto roomDto);
 
-    List<RoomDto> search(String name);
+    List<RoomDto> searchByAll(String name);
+
+    List<RoomDto> searchByStudy();
 }
