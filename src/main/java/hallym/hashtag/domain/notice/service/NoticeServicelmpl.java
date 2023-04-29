@@ -63,6 +63,14 @@ public class NoticeServicelmpl implements NoticeService{
         return "삭제되었습니다.";
     }
 
+    @Override
+    public List<NoticeResponseDto> search(String keyword) {
+        List<Notice> noticeList = noticeRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+        if(noticeList == null) return null;
+        else return noticeList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+
     public Notice toEntity(NoticeRequestDto noticeRequestDto) {
         return Notice.builder()
                 .nno(noticeRequestDto.getNno())

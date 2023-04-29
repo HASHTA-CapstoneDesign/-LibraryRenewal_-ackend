@@ -45,4 +45,10 @@ public class NoticeServiceTest {
         Long nno = 1L;
         noticeService.delete(nno);
     }
+
+    @Test
+    public void testSearch() {
+        String keyword = "이러하다";
+        noticeService.search(keyword);
+    }
 }

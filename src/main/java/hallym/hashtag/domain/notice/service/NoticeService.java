@@ -16,4 +16,6 @@ public interface NoticeService {
     NoticeResponseDto update(Long nno, NoticeRequestDto noticeRequestDto);
 
     String delete(Long nno);
+
+    List<NoticeResponseDto> search(String keyword);
 }

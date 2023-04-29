@@ -40,4 +40,9 @@ public class NoticeController {
     public String noticeDelete(@PathVariable(name = "nno") Long nno) {
         return noticeService.delete(nno);
     }
+
+    @GetMapping
+    public List<NoticeResponseDto> noticeSearch(@RequestParam(value = "keyword") String keyword){
+        return noticeService.search(keyword);
+    }
 }
