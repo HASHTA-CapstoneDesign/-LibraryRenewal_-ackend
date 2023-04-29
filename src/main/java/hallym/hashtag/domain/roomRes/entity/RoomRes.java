@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 @Getter
 @Entity
-@Table(name = "student")
+@Table(name = "roomRes")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -23,7 +23,7 @@ import java.time.LocalDate;
 public class RoomRes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rno;
+    private Long rrno;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd")

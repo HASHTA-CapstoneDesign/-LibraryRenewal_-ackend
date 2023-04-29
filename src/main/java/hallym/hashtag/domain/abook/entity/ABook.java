@@ -31,7 +31,7 @@ public class ABook extends BaseEntity {
     @ColumnDefault("false")
     private boolean loanType; //대출여부 1:대출중, 0:대출가능
 
-    @OneToOne(mappedBy = "abook")
+    @OneToOne(mappedBy = "aBook")
     private Loan loan;
 
     public void setLoanType(Boolean loanType) {
