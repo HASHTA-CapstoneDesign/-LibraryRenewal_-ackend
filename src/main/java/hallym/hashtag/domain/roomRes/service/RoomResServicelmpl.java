@@ -24,7 +24,7 @@ public class RoomResServicelmpl implements RoomResService {
 
     public RoomResResponseDto toDto(RoomRes roomRes) {
         return RoomResResponseDto.builder()
-                .rno(roomRes.getRno())
+                .rno(roomRes.getRrno())
                 .creDate(roomRes.getCreDate())
                 .useDate(roomRes.getUseDate())
                 .reserve(roomRes.isReserve())
