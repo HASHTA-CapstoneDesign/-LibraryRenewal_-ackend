@@ -21,4 +21,16 @@ public class RoomServiceTest {
                 .build();
         roomService.create(roomDto);
     }
+
+    @Test
+    public void testSearch() {
+        String name = "스터디";
+        roomService.search(name);
+    }
+
+    @Test
+    public void testSearchFail() {
+        String name = "방";
+        roomService.search(name);
+    }
 }

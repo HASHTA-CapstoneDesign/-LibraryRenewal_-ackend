@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -18,6 +20,13 @@ public class RoomServicelmpl implements RoomService{
     public RoomDto create(RoomDto roomDto) {
         roomRepository.save(toEntity(roomDto));
         return roomDto;
+    }
+
+    @Override
+    public List<RoomDto> search(String name) {
+        List<Room> roomList = roomRepository.findByNameContaining(name);
+        if(roomList == null) return null;
+        else return roomList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Room toEntity(RoomDto roomDto) {
