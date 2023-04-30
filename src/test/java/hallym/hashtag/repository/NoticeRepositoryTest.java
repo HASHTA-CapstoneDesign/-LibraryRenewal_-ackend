@@ -19,11 +19,17 @@ public class NoticeRepositoryTest {
 
     @Test
     public void testSave() {
-        Optional<Admin> byAno = adminRepository.findById(3L);
+        Optional<Admin> byAno = adminRepository.findById(1L);
         Notice notice = Notice.builder()
                 .title("클라이언트의 가계도 그리기")
                 .content("클라이언트의 가계도는 이러하다.")
                 .admin(byAno.get()).build();
         noticeRepository.save(notice);
+    }
+
+    @Test
+    public void testSearch() {
+        String keyword = "이러하다";
+        noticeRepository.findByTitleContainingOrContentContaining(keyword, keyword);
     }
 }

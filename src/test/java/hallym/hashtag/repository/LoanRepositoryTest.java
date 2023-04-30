@@ -27,7 +27,7 @@ public class LoanRepositoryTest {
     public void testSave() {
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
-        Optional<ABook> byAbno = aBookRepository.findById(1L);
+        Optional<ABook> byAbno = aBookRepository.findById(2L);
         Optional<Student> bySno = studentRepository.findById(1L);
         Loan loan = Loan.builder()
                 .aBook(byAbno.get())
@@ -50,5 +50,4 @@ public class LoanRepositoryTest {
         List<Loan> loanList = loanRepository.findByABook_abno(abno);
         System.out.println(loanList.size());
     }
-
 }

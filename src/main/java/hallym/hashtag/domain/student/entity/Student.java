@@ -1,9 +1,14 @@
 package hallym.hashtag.domain.student.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -25,6 +30,11 @@ public class Student extends BaseEntity {
     private String major;
 
     private String password;
+
+    @Builder.Default
+    @JsonManagedReference
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private List<Loan> loans = new ArrayList<>();
 
     public void updateStudent(Student student) {
         this.name = student.name;

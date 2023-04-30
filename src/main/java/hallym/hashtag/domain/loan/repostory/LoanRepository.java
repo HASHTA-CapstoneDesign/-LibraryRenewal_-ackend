@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.loan.repostory;
 
+import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.loan.entity.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,8 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     @Query("select l from Loan l where l.aBook.abno=:abno")
     List<Loan> findByABook_abno(@Param("abno") Long abno);
+
+    @Query("select l from Loan l left join fetch l.aBook")
+    ABook findMemberFetchJoin();
 
 }

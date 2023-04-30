@@ -1,6 +1,7 @@
 package hallym.hashtag.domain.book.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,11 @@ public class Book extends BaseEntity {
 
     @Builder.Default
     private int loanCount = 0;
+
+    @Builder.Default
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    private List<ABook> aBooks = new ArrayList<>();
 
     public void updateLoanCount(int loanCount) {
         this.loanCount = loanCount;

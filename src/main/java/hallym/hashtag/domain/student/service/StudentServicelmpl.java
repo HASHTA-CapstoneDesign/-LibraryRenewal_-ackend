@@ -80,6 +80,7 @@ public class StudentServicelmpl implements StudentService {
                 .cleanup(studentRequestDto.getCleanup())
                 .major(studentRequestDto.getMajor())
                 .password(studentRequestDto.getPassword())
+                .loans(studentRequestDto.getLoans())
                 .build();
 //        return modelMapper.map(studentRequestDto, Student.class);
     }

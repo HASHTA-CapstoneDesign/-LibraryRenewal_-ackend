@@ -54,4 +54,33 @@ public class BookRepositoryTest {
     public void testFindAllByLoanCount() {
         bookRepository.findAllByLoanCount();
     }
+
+    @Test
+    public void testSetBook() {
+        Book book = Book.builder()
+                .tag(100L)
+                .title("제목")
+                .author("김미진")
+                .isbn("1111")
+                .pudDate("2001년 07월 21일")
+                .bookPage(123L)
+                .bookType(BookType.철학)
+                .build();
+        bookRepository.save(book);
+
+        ABook aBook1 = ABook.builder()
+                .tag("gg")
+                .build();
+
+        ABook aBook2 = ABook.builder()
+                .tag("gg")
+                .build();
+
+        aBook1.setBook(book);
+        aBook2.setBook(book);
+        aBookRepository.save(aBook1);
+        aBookRepository.save(aBook2);
+
+        assertThat(book.getABooks().size()).isEqualTo(2);
+    }
 }

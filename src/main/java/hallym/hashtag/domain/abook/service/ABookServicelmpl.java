@@ -46,13 +46,17 @@ public class ABookServicelmpl implements ABookService {
                 .abno(aBookRequestDto.getAbno())
                 .tag(aBookRequestDto.getTag())
                 .loanType(aBookRequestDto.isLoanType())
-                .book(aBookRequestDto.getBook()).build();
+                .book(aBookRequestDto.getBook())
+                .reserveType(aBookRequestDto.isReserveType())
+                .build();
     }
 
     public ABookResponseDto toDto(ABook aBook){
         return ABookResponseDto.builder()
                 .abno(aBook.getAbno())
                 .loanType(aBook.isLoanType())
-                .tag(aBook.getTag()).build();
+                .tag(aBook.getTag())
+                .reserveType(aBook.isReserveType())
+                .build();
     }
 }
