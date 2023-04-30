@@ -43,6 +43,7 @@ public class RoomServicelmpl implements RoomService{
                 .content(roomDto.getContent())
                 .floor(roomDto.getFloor())
                 .studyRoom(roomDto.isStudyRoom())
+                .reserve(roomDto.isReserve())
                 .build();
     }
 
@@ -53,6 +54,7 @@ public class RoomServicelmpl implements RoomService{
                 .content(room.getContent())
                 .floor(room.getFloor())
                 .studyRoom(room.isStudyRoom())
+                .reserve(room.isReserve())
                 .build();
     }
 }

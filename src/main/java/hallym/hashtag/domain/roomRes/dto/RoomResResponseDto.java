@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.roomRes.dto;
 
+import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.roomRes.entity.Time;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,4 @@ public class RoomResResponseDto {
     private Time time;
 
     private String roomName;
-
-    @ColumnDefault("false")
-    private boolean reserve;
 }

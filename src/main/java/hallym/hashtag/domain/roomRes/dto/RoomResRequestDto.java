@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.roomRes.dto;
 
+import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.roomRes.entity.Time;
 import hallym.hashtag.domain.student.entity.Student;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,5 @@ public class RoomResRequestDto {
 
     private Time time;
 
-    private String roomName;
-
-    private boolean reserve;
+    private Room room;
 }

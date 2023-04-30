@@ -1,11 +1,9 @@
 package hallym.hashtag.domain.roomRes.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.student.entity.Student;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
 @Getter
 @Entity
 @Table(name = "roomRes")
@@ -32,8 +31,6 @@ public class RoomRes {
 
     private String useDate;
 
-    private boolean reserve;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sno")
@@ -41,5 +38,8 @@ public class RoomRes {
 
     private Time time;
 
-    private String roomName;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rno")
+    private Room room;
 }

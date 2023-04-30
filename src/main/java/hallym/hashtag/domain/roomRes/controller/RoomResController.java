@@ -1,9 +1,10 @@
 package hallym.hashtag.domain.roomRes.controller;
 
+import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
+import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.service.RoomResService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController

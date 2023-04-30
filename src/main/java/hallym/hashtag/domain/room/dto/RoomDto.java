@@ -20,4 +20,6 @@ public class RoomDto {
     private String content;
 
     private boolean studyRoom;
+
+    private boolean reserve;
 }
