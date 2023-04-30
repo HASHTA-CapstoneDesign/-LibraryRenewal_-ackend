@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,4 +22,6 @@ public class BookResResponseDto {
     private String bookName;
 
     private String studentName;
+
+    private List<String> useTimes = new ArrayList<>();
 }
