@@ -31,13 +31,28 @@ public class BookResServicelmpl implements BookResService {
         BookRes bookRes = new BookRes();
         bookRes.setABook(byAno.get());
         bookRes.setStudent(bySno.get());
+        ABook aBook = byAno.get();
+        aBook.setReserveType(Boolean.TRUE);
+        aBookRepository.save(aBook);
         bookResRepository.save(bookRes);
         return toDto(bookRes);
     }
 
+    @Override
+    public String cancel(Long brno) {
+        Optional<BookRes> byBrno = bookResRepository.findById(brno);
+        if (byBrno.isEmpty()) return "아이디가 존재하지 않습니다.";
+        BookRes bookRes = byBrno.get();
+        ABook aBook = bookRes.getABook();
+        aBook.setReserveType(Boolean.FALSE);
+        aBookRepository.save(aBook);
+        bookResRepository.delete(bookRes);
+        return "취소되었습니다.";
+    }
+
     public BookRes toEntity(BookResRequestDto bookResRequestDto) {
         return BookRes.builder()
-                .nno(bookResRequestDto.getNno())
+                .brno(bookResRequestDto.getBrno())
                 .creDate(bookResRequestDto.getCreDate())
                 .aBook(bookResRequestDto.getABook())
                 .student(bookResRequestDto.getStudent())
@@ -46,7 +61,7 @@ public class BookResServicelmpl implements BookResService {
 
     public BookResResponseDto toDto(BookRes bookRes) {
         return BookResResponseDto.builder()
-                .nno(bookRes.getNno())
+                .brno(bookRes.getBrno())
                 .creDate(bookRes.getCreDate())
                 .studentName(bookRes.getStudent().getName())
                 .bookName(bookRes.getABook().getBook().getTitle())

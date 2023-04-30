@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BookResRequestDto {
 
-    private Long nno;
+    private Long brno;
 
     private Student student;
 

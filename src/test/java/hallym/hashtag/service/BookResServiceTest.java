@@ -17,4 +17,10 @@ public class BookResServiceTest {
 
         bookResService.reserve(ano, sno);
     }
+
+    @Test
+    public void testCancel() {
+        Long brno = 1L;
+        bookResService.cancel(brno);
+    }
 }

@@ -26,7 +26,7 @@ import java.time.LocalDate;
 public class BookRes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long nno;
+    private Long brno;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)

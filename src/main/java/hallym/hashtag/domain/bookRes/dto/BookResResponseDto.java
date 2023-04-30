@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BookResResponseDto {
 
-    private Long nno;
+    private Long brno;
 
     private LocalDate creDate;
 

@@ -3,10 +3,7 @@ package hallym.hashtag.domain.bookRes.controller;
 import hallym.hashtag.domain.bookRes.dto.BookResResponseDto;
 import hallym.hashtag.domain.bookRes.service.BookResService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,5 +15,10 @@ public class BookResController {
     public BookResResponseDto reserve(@PathVariable(name = "sno") Long sno,
                                       @PathVariable(name = "abno") Long abno) {
         return bookResService.reserve(sno, abno);
+    }
+
+    @DeleteMapping("{brno}")
+    public String cancel(@PathVariable(name = "brno") Long brno) {
+        return bookResService.cancel(brno);
     }
 }
