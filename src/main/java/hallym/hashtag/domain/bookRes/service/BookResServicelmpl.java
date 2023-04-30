@@ -58,6 +58,12 @@ public class BookResServicelmpl implements BookResService {
         return bookResList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
+    @Override
+    public List<BookResResponseDto> findByAll() {
+        List<BookRes> bookResList = bookResRepository.findAll();
+        return bookResList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
     public BookRes toEntity(BookResRequestDto bookResRequestDto) {
         return BookRes.builder()
                 .brno(bookResRequestDto.getBrno())

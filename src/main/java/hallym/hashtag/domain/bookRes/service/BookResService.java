@@ -10,4 +10,6 @@ public interface BookResService {
     String cancel(Long brno);
 
     List<BookResResponseDto> findByStudent(Long sno);
+
+    List<BookResResponseDto> findByAll();
 }

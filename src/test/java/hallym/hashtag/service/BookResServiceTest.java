@@ -29,4 +29,9 @@ public class BookResServiceTest {
         Long sno = 1L;
         bookResService.findByStudent(sno);
     }
+
+    @Test
+    public void testFindByAll() {
+        bookResService.findByAll();
+    }
 }

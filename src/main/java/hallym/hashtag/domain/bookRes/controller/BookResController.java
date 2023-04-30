@@ -28,4 +28,9 @@ public class BookResController {
     public List<BookResResponseDto> findByStudent(@PathVariable(name = "sno") Long sno) {
         return bookResService.findByStudent(sno);
     }
+
+    @GetMapping("list")
+    public List<BookResResponseDto> findByAll() {
+        return bookResService.findByAll();
+    }
 }
