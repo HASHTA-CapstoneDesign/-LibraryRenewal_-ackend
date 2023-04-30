@@ -1,0 +1,20 @@
+package hallym.hashtag.service;
+
+import hallym.hashtag.domain.bookRes.service.BookResService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BookResServiceTest {
+    @Autowired
+    BookResService bookResService;
+
+    @Test
+    public void testReserve() {
+        Long sno = 1L;
+        Long ano = 1L;
+
+        bookResService.reserve(ano, sno);
+    }
+}

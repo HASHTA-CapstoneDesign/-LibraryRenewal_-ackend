@@ -20,5 +20,7 @@ public class ABookRequestDto {
 
     private boolean loanType;
 
+    private boolean reserveType;
+
     private Loan loan;
 }

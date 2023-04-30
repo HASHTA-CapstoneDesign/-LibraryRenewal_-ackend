@@ -15,4 +15,6 @@ public class ABookResponseDto {
     private String tag;
 
     private boolean loanType;
+
+    private boolean reserveType;
 }
