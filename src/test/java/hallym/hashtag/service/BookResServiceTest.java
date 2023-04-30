@@ -23,4 +23,10 @@ public class BookResServiceTest {
         Long brno = 1L;
         bookResService.cancel(brno);
     }
+
+    @Test
+    public void testFindByStudent() {
+        Long sno = 1L;
+        bookResService.findByStudent(sno);
+    }
 }

@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -48,6 +50,12 @@ public class BookResServicelmpl implements BookResService {
         aBookRepository.save(aBook);
         bookResRepository.delete(bookRes);
         return "취소되었습니다.";
+    }
+
+    @Override
+    public List<BookResResponseDto> findByStudent(Long sno) {
+        List<BookRes> bookResList = bookResRepository.findByStudent_sno(sno);
+        return bookResList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public BookRes toEntity(BookResRequestDto bookResRequestDto) {

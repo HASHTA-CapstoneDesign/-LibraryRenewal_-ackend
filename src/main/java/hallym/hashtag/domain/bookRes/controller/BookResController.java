@@ -5,6 +5,8 @@ import hallym.hashtag.domain.bookRes.service.BookResService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("reserve/book")
@@ -20,5 +22,10 @@ public class BookResController {
     @DeleteMapping("{brno}")
     public String cancel(@PathVariable(name = "brno") Long brno) {
         return bookResService.cancel(brno);
+    }
+
+    @GetMapping("{sno}")
+    public List<BookResResponseDto> findByStudent(@PathVariable(name = "sno") Long sno) {
+        return bookResService.findByStudent(sno);
     }
 }

@@ -21,6 +21,5 @@ public class RoomResServiceTest {
                 .time(Time.오전11시)
                 .build();
         roomResService.reserve(sno, rno, roomResRequestDto);
-
     }
 }
