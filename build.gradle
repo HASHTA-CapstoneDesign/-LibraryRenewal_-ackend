@@ -31,8 +31,6 @@ dependencies {
 
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
 
-	implementation group: 'com.auth0', name: 'java-jwt', version: '3.10.3'
-
 
 }
 
