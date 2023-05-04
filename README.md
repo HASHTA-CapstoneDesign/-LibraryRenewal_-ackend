@@ -7,8 +7,8 @@
 ## Deployment url
 
 > **개발 버전** : [http://@@@.com/](http://@@@.come/) <br>
-> **프론트 서버** : [http://@@@.com:1234/](http://@@@.come:1234/)<br>
-> **백엔드 서버** : [http://@@@.com:8080/](http://@@@.come:5678/)<br>
+> **프론트 서버** : [http://@@@.com:1234/](http://@@@.come:3000/)<br>
+> **백엔드 서버** : [http://@@@.com:8080/](http://@@@.come:8080/)<br>
 
 ## Team
 
