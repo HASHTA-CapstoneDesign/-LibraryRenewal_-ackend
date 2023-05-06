@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.user.service;
 
+import hallym.hashtag.domain.user.dto.LoginRequestDto;
 import hallym.hashtag.domain.user.dto.UserRequestDto;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
@@ -30,8 +31,6 @@ public class UserSerivcelmpl implements UserService{
 
         return "회원가입 완료";
     }
-
-
 
     private User toEntity(UserRequestDto userRequestDto) {
         return User.builder()

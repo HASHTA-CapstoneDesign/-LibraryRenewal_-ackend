@@ -3,8 +3,6 @@ package hallym.hashtag.global.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hallym.hashtag.domain.token.entity.Token;
-import hallym.hashtag.domain.token.repository.TokenRepository;
 import hallym.hashtag.domain.user.dto.LoginRequestDto;
 import hallym.hashtag.domain.user.dto.LoginResponseDto;
 import hallym.hashtag.global.config.auth.PrincipalDetails;
@@ -26,6 +24,8 @@ import java.util.Date;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
+    String result;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -95,7 +95,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .uno( principalDetailis.getUser().getUno())
                 .token(jwtToken).build();
 
-        String result = objectMapper.writeValueAsString(loginResponseDto);
+        result = objectMapper.writeValueAsString(loginResponseDto);
 
         response.getWriter().write(result);
     }

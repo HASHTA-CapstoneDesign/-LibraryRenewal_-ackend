@@ -6,6 +6,8 @@ import hallym.hashtag.domain.notice.dto.NoticeRequestDto;
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
 import hallym.hashtag.domain.notice.entity.Notice;
 import hallym.hashtag.domain.notice.repository.NoticeRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +21,14 @@ import java.util.stream.Collectors;
 @Service
 public class NoticeServicelmpl implements NoticeService{
     private final NoticeRepository noticeRepository;
-    private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public NoticeResponseDto create(Long ano, NoticeRequestDto noticeRequestDto) {
-        Optional<Admin> byAno = adminRepository.findById(ano);
-        if(byAno.isEmpty()) return null;
+    public NoticeResponseDto create(Long uno, NoticeRequestDto noticeRequestDto) {
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
         Notice notice = toEntity(noticeRequestDto);
-        notice.setAdmin(byAno.get());
+        notice.setUser(byUno.get());
         noticeRepository.save(notice);
         return toDto(notice);
     }
@@ -76,7 +78,7 @@ public class NoticeServicelmpl implements NoticeService{
                 .nno(noticeRequestDto.getNno())
                 .title(noticeRequestDto.getTitle())
                 .content(noticeRequestDto.getContent())
-                .admin(noticeRequestDto.getAdmin())
+                .user(noticeRequestDto.getUser())
                 .build();
     }
 
@@ -87,6 +89,6 @@ public class NoticeServicelmpl implements NoticeService{
                 .content(notice.getContent())
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
-                .writer(notice.getAdmin().getName()).build();
+                .writer("관리자").build();
     }
 }
