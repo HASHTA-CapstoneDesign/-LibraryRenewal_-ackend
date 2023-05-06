@@ -3,7 +3,10 @@ package hallym.hashtag.global.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hallym.hashtag.domain.token.entity.Token;
+import hallym.hashtag.domain.token.repository.TokenRepository;
 import hallym.hashtag.domain.user.dto.LoginRequestDto;
+import hallym.hashtag.domain.user.dto.LoginResponseDto;
 import hallym.hashtag.global.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +26,8 @@ import java.util.Date;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     // Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
     // 인증 요청시에 실행되는 함수 => /login
@@ -86,7 +91,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
 
-        // /login 마치고 나면, 토큰을 body로 보내줌
-        response.getWriter().write(String.valueOf(jwtToken));
+        LoginResponseDto loginResponseDto = LoginResponseDto.builder()
+                .uno( principalDetailis.getUser().getUno())
+                .token(jwtToken).build();
+
+        String result = objectMapper.writeValueAsString(loginResponseDto);
+
+        response.getWriter().write(result);
     }
 }
