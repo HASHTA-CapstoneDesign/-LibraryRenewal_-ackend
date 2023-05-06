@@ -22,6 +22,8 @@ public class Notice extends BaseEntity {
 
     private String content;
 
+    private boolean important;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uno")

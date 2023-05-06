@@ -16,7 +16,9 @@ public class NoticeServiceTest {
         Long ano = 1L;
         NoticeRequestDto noticeRequestDto = NoticeRequestDto.builder()
                 .title("제목1")
-                .content("내용").build();
+                .content("내용")
+                .important(Boolean.TRUE)
+                .build();
         noticeService.create(ano, noticeRequestDto);
     }
 

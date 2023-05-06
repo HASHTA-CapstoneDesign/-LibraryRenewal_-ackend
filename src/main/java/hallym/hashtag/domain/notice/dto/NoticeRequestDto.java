@@ -18,4 +18,6 @@ public class NoticeRequestDto {
     private String content;
 
     private User user;
+
+    private boolean important;
 }

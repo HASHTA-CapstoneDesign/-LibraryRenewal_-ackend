@@ -77,6 +77,7 @@ public class NoticeServicelmpl implements NoticeService{
                 .title(noticeRequestDto.getTitle())
                 .content(noticeRequestDto.getContent())
                 .user(noticeRequestDto.getUser())
+                .important(noticeRequestDto.isImportant())
                 .build();
     }
 
@@ -87,6 +88,7 @@ public class NoticeServicelmpl implements NoticeService{
                 .content(notice.getContent())
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
+                .important(notice.isImportant())
                 .writer("관리자").build();
     }
 }
