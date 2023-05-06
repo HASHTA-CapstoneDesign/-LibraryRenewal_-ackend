@@ -31,11 +31,6 @@ public class Student extends BaseEntity {
 
     private String password;
 
-    @Builder.Default
-    @JsonManagedReference
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private List<Loan> loans = new ArrayList<>();
-
     public void updateStudent(Student student) {
         this.name = student.name;
         this.phone = student.phone;

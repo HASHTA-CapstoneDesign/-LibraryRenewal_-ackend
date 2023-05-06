@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.student.entity.Student;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import hallym.hashtag.domain.user.entity.User;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,10 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
+@Getter
 @Builder
 @Entity
-@Table(name = "loan")
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(value = { AuditingEntityListener.class })
@@ -47,14 +44,25 @@ public class Loan {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sno")
-    private Student student;
+    @JoinColumn(name = "uno")
+    private User user;
 
-    public void setStudent(Student student) {
-        if(this.student != null)
-            this.student.getLoans().remove(this);
-        this.student = student;
-        student.getLoans().add(this);
+    private String returnType;
+
+    public void setABook(ABook aBook) {
+        this.aBook = aBook;
+    }
+
+    public void setRetDate(LocalDate localDate) {
+        this.retDate = localDate;
+    }
+
+    public void setNowRetDate() {
+        this.nowRetDate = LocalDate.now();
+    }
+
+    public void setReturnType(String returnType) {
+        this.returnType = returnType;
     }
 
 }

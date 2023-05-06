@@ -12,13 +12,7 @@ import java.util.List;
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Long> {
 
-    @Query("select l from Loan l where l.student.sno=:sno")
-    List<Loan> findByStudent_sno(@Param("sno") Long sno);
-
-    @Query("select l from Loan l where l.aBook.abno=:abno")
-    List<Loan> findByABook_abno(@Param("abno") Long abno);
-
-    @Query("select l from Loan l left join fetch l.aBook")
-    ABook findMemberFetchJoin();
+    @Query("select l from Loan l where l.user.uno=:uno order by l.lno desc")
+    List<Loan> findByUser_uno(@Param("uno") Long uno);
 
 }

@@ -6,6 +6,8 @@ import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
 import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.student.repository.StudentRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,33 +23,26 @@ public class LoanRepositoryTest {
     @Autowired
     ABookRepository aBookRepository;
     @Autowired
-    StudentRepository studentRepository;
+    UserRepository userRepository;
 
     @Test
     public void testSave() {
         LocalDate creDate = LocalDate.now();
         LocalDate retDate = creDate.plusDays(7);
-        Optional<ABook> byAbno = aBookRepository.findById(2L);
-        Optional<Student> bySno = studentRepository.findById(1L);
+        Optional<ABook> byAbno = aBookRepository.findById(1L);
+        Optional<User> byUno = userRepository.findById(1L);
         Loan loan = Loan.builder()
                 .aBook(byAbno.get())
-                .student(bySno.get())
+                .user(byUno.get())
                 .retDate(retDate)
                 .build();
         loanRepository.save(loan);
     }
 
     @Test
-    public void testFindByStudent() {
-        Long sno = 1L;
-        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
-        System.out.println(loanList.size());
-    }
-
-    @Test
-    public void testFindByABook() {
-        Long abno = 1L;
-        List<Loan> loanList = loanRepository.findByABook_abno(abno);
+    public void testFindByUser() {
+        Long uno = 1L;
+        List<Loan> loanList = loanRepository.findByUser_uno(uno);
         System.out.println(loanList.size());
     }
 }

@@ -8,13 +8,11 @@ import java.util.List;
 
 public interface LoanService {
 
-    LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno);
+    LoanResponseDto create(Long uno, Long abno);
 
-    LoanResponseDto extension(Long sno,  Long lno);
+    LoanResponseDto extension(Long lno);
 
-    LoanResponseDto returnBook(Long sno, Long lno);
+    LoanResponseDto returnBook(Long lno);
 
-    List<LoanResponseDto> findAllByStudent(Long sno);
-
-    List<LoanResponseDto> findAllByABook(Long bno);
+    List<LoanResponseDto> findAllByUser(Long uno);
 }

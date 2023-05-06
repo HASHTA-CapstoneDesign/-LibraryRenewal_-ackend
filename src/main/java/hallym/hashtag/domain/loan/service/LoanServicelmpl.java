@@ -4,12 +4,11 @@ import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.book.repository.BookRepository;
-import hallym.hashtag.domain.loan.dto.LoanRequestDto;
 import hallym.hashtag.domain.loan.dto.LoanResponseDto;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
-import hallym.hashtag.domain.student.entity.Student;
-import hallym.hashtag.domain.student.repository.StudentRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,79 +23,64 @@ import java.util.stream.Collectors;
 @Service
 public class LoanServicelmpl implements LoanService {
     private final ABookRepository aBookRepository;
-    private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
     private final LoanRepository loanRepository;
     private final BookRepository bookRepository;
     @Override
-    public LoanResponseDto create(LoanRequestDto loanRequestDto, Long sno, Long abno) {
+    public LoanResponseDto create(Long uno, Long abno) { // 대출
         Optional<ABook> byAbno = aBookRepository.findById(abno);
-        Optional<Student> bySno = studentRepository.findById(sno);
-        Book byBno = byAbno.get().getBook();
-
         if(byAbno.isEmpty()) return null;
-        if(bySno.isEmpty()) return null;
 
-        Loan loan = toEntity(loanRequestDto);
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
 
+        Loan loan = Loan.builder().retDate(LocalDate.now().plusDays(20))
+                .user(byUno.get()).build(); // 반납 날짜 생성
         loan.setABook(byAbno.get());
-        loan.setStudent(bySno.get());
-
-        LocalDate creDate = LocalDate.now();
-        LocalDate retDate = creDate.plusDays(7);
-        loan.setRetDate(retDate);
 
         ABook aBook = byAbno.get();
-
-        aBook.setLoanType(Boolean.TRUE);
+        aBook.setLoanType(Boolean.TRUE); // 대출 여부 불가능 상태로 저장
 
         Book book = byAbno.get().getBook();
-        int loanCount = book.getLoanCount() + 1;
-        book.updateLoanCount(loanCount);
+        book.updateLoanCounting(); // 대출 횟수 카운팅
 
         bookRepository.save(book);
         aBookRepository.save(aBook);
         loanRepository.save(loan);
+
         return toDto(loan);
     }
 
     @Override
-    public LoanResponseDto extension(Long sno, Long lno) {
-        Optional<Student> bySno = studentRepository.findById(sno);
+    public LoanResponseDto extension(Long lno) { // 연장
         Optional<Loan> byLno = loanRepository.findById(lno);
-
-        if(bySno.isEmpty()) return null;
         if(byLno.isEmpty()) return null;
 
-        LocalDate Date = byLno.get().getRetDate();
-        LocalDate retDate = Date.plusDays(7);
-
         Loan updateLoan = byLno.get();
-
-        updateLoan.setRetDate(retDate);
+        updateLoan.setRetDate(byLno.get().getRetDate().plusDays(20)); // 연장한 날짜로 수정하여 저장
 
         loanRepository.save(updateLoan);
         return toDto(updateLoan);
     }
 
     @Override
-    public LoanResponseDto returnBook(Long sno, Long lno) {
-        Optional<Student> bySno = studentRepository.findById(sno);
+    public LoanResponseDto returnBook(Long lno) { // 반납
         Optional<Loan> byLno = loanRepository.findById(lno);
-
-        if(bySno.isEmpty()) return null;
         if(byLno.isEmpty()) return null;
 
-        LocalDate nowDate = LocalDate.now();
-
         Loan updateLoan = byLno.get();
+        updateLoan.setNowRetDate(); // 반납한 날짜 저장
 
-        updateLoan.setNowRetDate(nowDate);
+        if(true == updateLoan.getRetDate().isAfter(updateLoan.getNowRetDate())) {
+            updateLoan.setReturnType("정상반납");
+        } else {
+            updateLoan.setReturnType("연체반납");
+        }
 
         Optional<ABook> byAbno = aBookRepository.findById(byLno.get().getABook().getAbno());
-
+        if(byAbno.isEmpty()) return null;
         ABook aBook = byAbno.get();
-
-        aBook.setLoanType(Boolean.FALSE);
+        aBook.setLoanType(Boolean.FALSE); // 대출 여부 가능상태로 변환
 
         aBookRepository.save(aBook);
         loanRepository.save(updateLoan);
@@ -104,42 +88,24 @@ public class LoanServicelmpl implements LoanService {
     }
 
     @Override
-    public List<LoanResponseDto> findAllByStudent(Long sno) {
-        Optional<Student> bySno = studentRepository.findById(sno);
-        if(bySno.isEmpty()) return null;
+    public List<LoanResponseDto> findAllByUser(Long uno) { //학생별로 자신이 대출한 책 내역 조회
+        Optional<User> byUne = userRepository.findById(uno);
+        if(byUne.isEmpty()) return null;
 
-        List<Loan> loanList = loanRepository.findByStudent_sno(sno);
+        List<Loan> loanList = loanRepository.findByUser_uno(uno); // 생성된 순으로 조회
         return loanList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    @Override
-    public List<LoanResponseDto> findAllByABook(Long abno) {
-        Optional<ABook> byAbno = aBookRepository.findById(abno);
-        if(byAbno.isEmpty()) return null;
 
-        List<Loan> findLaon = loanRepository.findByABook_abno(abno);
-
-        return findLaon.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-
-    Loan toEntity(LoanRequestDto loanRequestDto){
-        return Loan.builder()
-                .lno(loanRequestDto.getLno())
-                .creDate(loanRequestDto.getCreDate())
-                .retDate(loanRequestDto.getRetDate())
-                .nowRetDate(loanRequestDto.getNowRetDate())
-                .aBook(loanRequestDto.getABook())
-                .student(loanRequestDto.getStudent())
-                .build();
-    }
-
-    LoanResponseDto toDto(Loan loan){
+    private LoanResponseDto toDto(Loan loan){
         return LoanResponseDto.builder()
                 .lno(loan.getLno())
                 .creDate(loan.getCreDate())
                 .retDate(loan.getRetDate())
                 .nowRetDate(loan.getNowRetDate())
+                .bookName(loan.getABook().getBook().getTitle())
+                .author(loan.getABook().getBook().getAuthor())
+                .returnType(loan.getReturnType())
                 .build();
     }
 

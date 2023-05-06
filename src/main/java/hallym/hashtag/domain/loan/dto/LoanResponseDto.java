@@ -20,4 +20,10 @@ public class LoanResponseDto {
 
     private LocalDate nowRetDate;
 
+    private String bookName;
+
+    private String author;
+
+    private String returnType;
+
 }
