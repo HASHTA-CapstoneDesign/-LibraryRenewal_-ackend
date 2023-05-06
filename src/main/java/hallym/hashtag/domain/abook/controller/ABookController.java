@@ -10,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("books/book")
+@RequestMapping("api/books/book")
 public class ABookController {
     private final ABookService aBookService;
 
