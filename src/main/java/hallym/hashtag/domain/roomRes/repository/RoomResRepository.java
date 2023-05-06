@@ -1,4 +1,4 @@
-package hallym.hashtag.domain.roomRes.repostory;
+package hallym.hashtag.domain.roomRes.repository;
 
 import hallym.hashtag.domain.roomRes.entity.RoomRes;
 import org.springframework.data.jpa.repository.JpaRepository;

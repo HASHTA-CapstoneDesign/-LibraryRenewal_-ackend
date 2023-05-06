@@ -2,7 +2,7 @@ package hallym.hashtag.domain.roomRes.dto;
 
 import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.roomRes.entity.UseTime;
-import hallym.hashtag.domain.student.entity.Student;
+import hallym.hashtag.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,11 +21,11 @@ public class RoomResRequestDto {
 
     private String useDate;
 
-    List<UseTime> useTimes = new ArrayList<>();
-
-    private Student student;
+    private User user;
 
     private Room room;
 
     private LocalDate creDate;
+
+    private List<UseTime> useTimes = new ArrayList<>();
 }

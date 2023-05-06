@@ -18,14 +18,15 @@ public class RoomResServiceTest {
     @Test
     public void testReserve() {
         Long sno = 1L;
-        Long rno = 2L;
+        Long rno = 1L;
 
-        List<UseTime> useTimeList = new ArrayList<>();
-        useTimeList.add(UseTime.time2); useTimeList.add(UseTime.time3);
+        List<UseTime> useTimes = new ArrayList<>();
+        useTimes.add(UseTime.builder().time("09:00-10:00").build());
+        useTimes.add(UseTime.builder().time("10:00-11:00").build());
 
         RoomResRequestDto roomResRequestDto = RoomResRequestDto.builder()
                 .useDate("2023-05-10")
-                .useTimes(useTimeList)
+                .useTimes(useTimes)
                 .build();
 
         roomResService.reserve(sno, rno, roomResRequestDto);
