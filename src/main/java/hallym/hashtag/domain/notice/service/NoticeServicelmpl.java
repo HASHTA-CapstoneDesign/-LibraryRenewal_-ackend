@@ -1,7 +1,5 @@
 package hallym.hashtag.domain.notice.service;
 
-import hallym.hashtag.domain.admin.entity.Admin;
-import hallym.hashtag.domain.admin.repository.AdminRepository;
 import hallym.hashtag.domain.notice.dto.NoticeRequestDto;
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
 import hallym.hashtag.domain.notice.entity.Notice;

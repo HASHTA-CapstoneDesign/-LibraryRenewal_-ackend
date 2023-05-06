@@ -1,11 +1,9 @@
 package hallym.hashtag.domain.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hallym.hashtag.domain.admin.entity.Admin;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 

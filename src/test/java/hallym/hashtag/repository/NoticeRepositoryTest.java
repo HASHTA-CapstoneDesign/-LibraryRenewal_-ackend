@@ -1,8 +1,5 @@
 package hallym.hashtag.repository;
 
-import hallym.hashtag.domain.admin.entity.Admin;
-import hallym.hashtag.domain.admin.repository.AdminRepository;
-import hallym.hashtag.domain.notice.entity.Notice;
 import hallym.hashtag.domain.notice.repository.NoticeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,6 @@ import java.util.Optional;
 public class NoticeRepositoryTest {
     @Autowired
     NoticeRepository noticeRepository;
-    @Autowired
-    AdminRepository adminRepository;
 
 //    @Test
 //    public void testSave() {
