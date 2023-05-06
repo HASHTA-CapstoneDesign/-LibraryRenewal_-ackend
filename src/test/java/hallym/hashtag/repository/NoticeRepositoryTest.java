@@ -25,6 +25,6 @@ public class NoticeRepositoryTest {
     @Test
     public void testSearch() {
         String keyword = "이러하다";
-        noticeRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+        noticeRepository.search(keyword);
     }
 }
