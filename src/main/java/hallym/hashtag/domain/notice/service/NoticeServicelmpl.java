@@ -33,7 +33,7 @@ public class NoticeServicelmpl implements NoticeService{
 
     @Override
     public List<NoticeResponseDto> findAll() {
-        List<Notice> noticeList = noticeRepository.findAll();
+        List<Notice> noticeList = noticeRepository.findByAll();
         return noticeList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
