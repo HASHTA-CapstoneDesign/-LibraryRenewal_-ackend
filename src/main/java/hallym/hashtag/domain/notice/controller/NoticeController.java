@@ -10,14 +10,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("notice")
+@RequestMapping("api/notice")
 public class NoticeController {
     private final NoticeService noticeService;
 
-    @PostMapping("{ano}")
-    public NoticeResponseDto noticeCreate(@PathVariable(name = "ano") Long ano,
+    @PostMapping("{uno}")
+    public NoticeResponseDto noticeCreate(@PathVariable(name = "uno") Long uno,
                                           @RequestBody NoticeRequestDto noticeRequestDto) {
-        return noticeService.create(ano, noticeRequestDto);
+        return noticeService.create(uno, noticeRequestDto);
     }
 
     @GetMapping("list")

@@ -17,43 +17,26 @@ public class LoanServiceTest {
 
     @Test
     public void loanCreate() {
-        Long sno = 1L;
-
-        LongStream.rangeClosed(1,3).forEach(i -> {
-            LoanRequestDto loanRequestDto = LoanRequestDto.builder()
-                    .build();
-            loanService.create(loanRequestDto, sno, i);
-        });
+        Long uno = 1L;
+        LongStream.rangeClosed(1,3).forEach(i -> loanService.create(uno, i));
 
     }
 
     @Test
     public void loanUpdate() {
-        Long sno = 1L;
         Long lno = 1L;
-
-        loanService.extension(sno, lno);
+        loanService.extension(lno);
     }
 
     @Test
     public void loanReturn() {
-        Long sno = 1L;
         Long lno = 1L;
-
-        loanService.returnBook(sno, lno);
+        loanService.returnBook(lno);
     }
 
     @Test
-    public void loanFindAllStudent() {
-        Long sno = 1L;
-
-        loanService.findAllByStudent(sno);
-    }
-
-    @Test
-    public void loanFindbyABook() {
-        Long abno = 1L;
-
-        loanService.findAllByABook(abno);
+    public void loanFindAllUser() {
+        Long uno = 1L;
+        loanService.findAllByUser(uno);
     }
 }

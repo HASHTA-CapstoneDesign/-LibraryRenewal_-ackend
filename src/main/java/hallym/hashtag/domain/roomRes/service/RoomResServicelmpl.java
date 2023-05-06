@@ -5,15 +5,16 @@ import hallym.hashtag.domain.room.repository.RoomRepository;
 import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
 import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.entity.RoomRes;
-import hallym.hashtag.domain.roomRes.repostory.RoomResRepository;
-import hallym.hashtag.domain.student.entity.Student;
-import hallym.hashtag.domain.student.repository.StudentRepository;
+import hallym.hashtag.domain.roomRes.entity.UseTime;
+import hallym.hashtag.domain.roomRes.repository.RoomResRepository;
+import hallym.hashtag.domain.roomRes.repository.UseTimeRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,34 +22,41 @@ import java.util.Optional;
 @Service
 public class RoomResServicelmpl implements RoomResService{
     private final RoomResRepository roomResRepository;
+    private final UseTimeRepository useTimeRepository;
     private final RoomRepository roomRepository;
-    private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public RoomResResponseDto reserve(Long sno, Long rno, RoomResRequestDto roomResRequestDto) {
-        Optional<Student> bySno = studentRepository.findById(sno);
-        if(bySno.isEmpty()) return null;
+    public RoomResResponseDto reserve(Long uno, Long rno, RoomResRequestDto roomResRequestDto) {
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
         Optional<Room> byRno = roomRepository.findById(rno);
         if (byRno.isEmpty()) return null;
+
         RoomRes roomRes = toEntity(roomResRequestDto);
         Room room = byRno.get();
         roomRes.setRoom(room);
-        room.setReserve(Boolean.TRUE);
-        roomRes.setStudent(bySno.get());
+        room.setReserve(Boolean.TRUE); //예약 중으로 저장
+        roomRes.setUser(byUno.get());
+
+        List<UseTime> useTimes = roomResRequestDto.getUseTimes();
+        for (int i = 0; i < useTimes.size(); i++) {
+            useTimes.get(i).setRoomRes(roomRes);
+        }
+
+        useTimeRepository.saveAll(useTimes);
         roomRepository.save(room);
         roomResRepository.save(roomRes);
         return toDto(roomRes);
     }
-
 
     public RoomRes toEntity(RoomResRequestDto roomResRequestDto) {
         return RoomRes.builder()
                 .rrno(roomResRequestDto.getRrno())
                 .creDate(roomResRequestDto.getCreDate())
                 .room(roomResRequestDto.getRoom())
-                .useTimes(roomResRequestDto.getUseTimes())
                 .useDate(roomResRequestDto.getUseDate())
-                .student(roomResRequestDto.getStudent())
+                .user(roomResRequestDto.getUser())
                 .build();
     }
 
@@ -56,10 +64,8 @@ public class RoomResServicelmpl implements RoomResService{
         return RoomResResponseDto.builder()
                 .rrno(roomRes.getRrno())
                 .roomName(roomRes.getRoom().getName())
-                .studentName(roomRes.getStudent().getName())
                 .useDate(roomRes.getUseDate())
                 .creDate(roomRes.getCreDate())
-                .useTimes(Collections.singletonList(roomRes.getUseTimes().toString()))
                 .build();
     }
 

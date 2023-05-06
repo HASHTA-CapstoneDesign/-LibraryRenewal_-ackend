@@ -2,7 +2,7 @@ package hallym.hashtag.domain.loan.dto;
 
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.book.entity.Book;
-import hallym.hashtag.domain.student.entity.Student;
+import hallym.hashtag.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class LoanRequestDto {
 
     private ABook aBook;
 
-    private Student student;
+    private User user;
 
     private Book book;
 }

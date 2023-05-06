@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NoticeService {
 
-    NoticeResponseDto create(Long ano, NoticeRequestDto noticeRequestDto);
+    NoticeResponseDto create(Long uno, NoticeRequestDto noticeRequestDto);
 
     List<NoticeResponseDto> findAll();
 

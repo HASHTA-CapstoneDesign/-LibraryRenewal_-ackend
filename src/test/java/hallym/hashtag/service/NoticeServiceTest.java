@@ -13,11 +13,13 @@ public class NoticeServiceTest {
 
     @Test
     public void testCreate() {
-        Long ano = 3L;
+        Long uno = 1L;
         NoticeRequestDto noticeRequestDto = NoticeRequestDto.builder()
                 .title("제목1")
-                .content("내용").build();
-        noticeService.create(ano, noticeRequestDto);
+                .content("내용")
+                .important(Boolean.TRUE)
+                .build();
+        noticeService.create(uno, noticeRequestDto);
     }
 
     @Test

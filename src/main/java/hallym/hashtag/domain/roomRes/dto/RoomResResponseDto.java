@@ -1,8 +1,6 @@
 package hallym.hashtag.domain.roomRes.dto;
 
-import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.roomRes.entity.UseTime;
-import hallym.hashtag.domain.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,11 +19,9 @@ public class RoomResResponseDto {
 
     private String useDate;
 
-    List<String> useTimes = new ArrayList<>();
-
-    private String studentName;
-
     private String roomName;
 
     private LocalDate creDate;
+
+    private List<UseTime> useTimes = new ArrayList<>();
 }

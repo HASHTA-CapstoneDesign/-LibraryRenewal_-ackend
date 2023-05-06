@@ -1,11 +1,11 @@
 package hallym.hashtag.domain.notice.service;
 
-import hallym.hashtag.domain.admin.entity.Admin;
-import hallym.hashtag.domain.admin.repository.AdminRepository;
 import hallym.hashtag.domain.notice.dto.NoticeRequestDto;
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
 import hallym.hashtag.domain.notice.entity.Notice;
 import hallym.hashtag.domain.notice.repository.NoticeRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +19,21 @@ import java.util.stream.Collectors;
 @Service
 public class NoticeServicelmpl implements NoticeService{
     private final NoticeRepository noticeRepository;
-    private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public NoticeResponseDto create(Long ano, NoticeRequestDto noticeRequestDto) {
-        Optional<Admin> byAno = adminRepository.findById(ano);
-        if(byAno.isEmpty()) return null;
+    public NoticeResponseDto create(Long uno, NoticeRequestDto noticeRequestDto) {
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
         Notice notice = toEntity(noticeRequestDto);
-        notice.setAdmin(byAno.get());
+        notice.setUser(byUno.get());
         noticeRepository.save(notice);
         return toDto(notice);
     }
 
     @Override
     public List<NoticeResponseDto> findAll() {
-        List<Notice> noticeList = noticeRepository.findAll();
+        List<Notice> noticeList = noticeRepository.findByAll();
         return noticeList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
@@ -65,7 +65,7 @@ public class NoticeServicelmpl implements NoticeService{
 
     @Override
     public List<NoticeResponseDto> search(String keyword) {
-        List<Notice> noticeList = noticeRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+        List<Notice> noticeList = noticeRepository.search(keyword);
         if(noticeList == null) return null;
         else return noticeList.stream().map(this::toDto).collect(Collectors.toList());
     }
@@ -76,7 +76,8 @@ public class NoticeServicelmpl implements NoticeService{
                 .nno(noticeRequestDto.getNno())
                 .title(noticeRequestDto.getTitle())
                 .content(noticeRequestDto.getContent())
-                .admin(noticeRequestDto.getAdmin())
+                .user(noticeRequestDto.getUser())
+                .important(noticeRequestDto.isImportant())
                 .build();
     }
 
@@ -87,6 +88,7 @@ public class NoticeServicelmpl implements NoticeService{
                 .content(notice.getContent())
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
-                .writer(notice.getAdmin().getName()).build();
+                .important(notice.isImportant())
+                .writer("관리자").build();
     }
 }

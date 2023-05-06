@@ -5,11 +5,9 @@ import hallym.hashtag.domain.bookRes.dto.BookResResponseDto;
 import java.util.List;
 
 public interface BookResService {
-    BookResResponseDto reserve(Long ano, Long sno);
+    BookResResponseDto reserve(Long ano, Long uno);
 
     String cancel(Long brno);
 
-    List<BookResResponseDto> findByStudent(Long sno);
-
-    List<BookResResponseDto> findByAll();
+    List<BookResResponseDto> findByUser(Long uno);
 }

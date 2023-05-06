@@ -10,37 +10,27 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("student/loan")
+@RequestMapping("api/loan")
 public class LoanController {
     private final LoanService loanService;
-    @PostMapping("{sno}/{abno}")
-    public LoanResponseDto loanCreate(@PathVariable(name = "sno") Long sno,
+    @PostMapping("{uno}/{abno}")
+    public LoanResponseDto loanCreate(@PathVariable(name = "uno") Long uno,
                                       @PathVariable(name = "abno") Long abno){
-
-        LoanRequestDto loanRequestDto = LoanRequestDto.builder().build();
-
-        return loanService.create(loanRequestDto, sno, abno);
+        return loanService.create(uno, abno);
     }
 
-    @PutMapping("checkout/{sno}/{lno}")
-    public LoanResponseDto loanExtension(@PathVariable(name = "sno") Long sno,
-                                      @PathVariable(name = "lno") Long lno){
-        return loanService.extension(sno, lno);
+    @PutMapping("checkout/{lno}")
+    public LoanResponseDto loanExtension(@PathVariable(name = "lno") Long lno){
+        return loanService.extension(lno);
     }
 
-    @PutMapping("return/{sno}/{lno}")
-    public LoanResponseDto loanReturn(@PathVariable(name = "sno") Long sno,
-                                      @PathVariable(name = "lno") Long lno) {
-        return loanService.returnBook(sno, lno);
+    @PutMapping("return/{lno}")
+    public LoanResponseDto loanReturn(@PathVariable(name = "lno") Long lno) {
+        return loanService.returnBook(lno);
     }
 
-    @GetMapping("student/{sno}")
-    public List<LoanResponseDto> loanFindAllStudent(@PathVariable(name = "sno") Long sno) {
-        return loanService.findAllByStudent(sno);
-    }
-
-    @GetMapping("abook/{abno}")
-    public List<LoanResponseDto> loanFindAllABook(@PathVariable(name = "abno") Long abno) {
-        return loanService.findAllByABook(abno);
+    @GetMapping("list/{uno}")
+    public List<LoanResponseDto> loanFindAllStudent(@PathVariable(name = "uno") Long uno) {
+        return loanService.findAllByUser(uno);
     }
 }

@@ -1,12 +1,10 @@
 package hallym.hashtag.domain.notice.dto;
 
-import hallym.hashtag.domain.admin.entity.Admin;
+import hallym.hashtag.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,5 +17,7 @@ public class NoticeRequestDto {
 
     private String content;
 
-    private Admin admin;
+    private User user;
+
+    private boolean important;
 }

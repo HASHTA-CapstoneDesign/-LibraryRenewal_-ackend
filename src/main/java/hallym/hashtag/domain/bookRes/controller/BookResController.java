@@ -9,14 +9,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("reserve/book")
+@RequestMapping("api/reserve/book")
 public class BookResController {
     private final BookResService bookResService;
 
-    @PostMapping("{sno}/{abno}")
-    public BookResResponseDto reserve(@PathVariable(name = "sno") Long sno,
+    @PostMapping("{uno}/{abno}")
+    public BookResResponseDto reserve(@PathVariable(name = "uno") Long uno,
                                       @PathVariable(name = "abno") Long abno) {
-        return bookResService.reserve(sno, abno);
+        return bookResService.reserve(uno, abno);
     }
 
     @DeleteMapping("{brno}")
@@ -24,13 +24,8 @@ public class BookResController {
         return bookResService.cancel(brno);
     }
 
-    @GetMapping("{sno}")
-    public List<BookResResponseDto> findByStudent(@PathVariable(name = "sno") Long sno) {
-        return bookResService.findByStudent(sno);
-    }
-
-    @GetMapping("list")
-    public List<BookResResponseDto> findByAll() {
-        return bookResService.findByAll();
+    @GetMapping("{uno}")
+    public List<BookResResponseDto> findByStudent(@PathVariable(name = "uno") Long uno) {
+        return bookResService.findByUser(uno);
     }
 }

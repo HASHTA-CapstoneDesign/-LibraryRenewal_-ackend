@@ -47,8 +47,8 @@ public class Book extends BaseEntity {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<ABook> aBooks = new ArrayList<>();
 
-    public void updateLoanCount(int loanCount) {
-        this.loanCount = loanCount;
+    public void updateLoanCounting() {
+        this.loanCount++;
     }
 
     public void updateBook(Book book) {

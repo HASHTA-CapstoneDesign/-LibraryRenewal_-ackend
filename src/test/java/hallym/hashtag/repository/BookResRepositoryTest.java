@@ -11,8 +11,8 @@ public class BookResRepositoryTest {
     BookResRepository bookResRepository;
 
     @Test
-    public void testFindByStudent_sno() {
-        Long sno = 1L;
-        bookResRepository.findByStudent_sno(sno);
+    public void testFindByUser_uno() {
+        Long uno = 1L;
+        bookResRepository.findByUser_uno(uno);
     }
 }

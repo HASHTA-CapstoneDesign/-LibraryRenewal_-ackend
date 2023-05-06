@@ -1,7 +1,7 @@
 package hallym.hashtag.domain.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hallym.hashtag.domain.admin.entity.Admin;
+import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
 
@@ -22,10 +22,12 @@ public class Notice extends BaseEntity {
 
     private String content;
 
+    private boolean important;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ano")
-    private Admin admin;
+    @JoinColumn(name = "uno")
+    private User user;
 
     public void update(Notice notice) {
         this.title = notice.title;

@@ -12,10 +12,10 @@ public class BookResServiceTest {
 
     @Test
     public void testReserve() {
-        Long sno = 1L;
+        Long uno = 1L;
         Long ano = 1L;
 
-        bookResService.reserve(ano, sno);
+        bookResService.reserve(ano, uno);
     }
 
     @Test
@@ -26,12 +26,7 @@ public class BookResServiceTest {
 
     @Test
     public void testFindByStudent() {
-        Long sno = 1L;
-        bookResService.findByStudent(sno);
-    }
-
-    @Test
-    public void testFindByAll() {
-        bookResService.findByAll();
+        Long uno = 1L;
+        bookResService.findByUser(uno);
     }
 }

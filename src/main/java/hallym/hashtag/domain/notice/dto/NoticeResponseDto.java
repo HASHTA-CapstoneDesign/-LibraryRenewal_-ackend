@@ -23,4 +23,6 @@ public class NoticeResponseDto {
     private LocalDateTime regDate;
 
     private LocalDateTime modDate;
+
+    private boolean important;
 }

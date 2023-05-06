@@ -8,6 +8,8 @@ import hallym.hashtag.domain.bookRes.entity.BookRes;
 import hallym.hashtag.domain.bookRes.repository.BookResRepository;
 import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.student.repository.StudentRepository;
+import hallym.hashtag.domain.user.entity.User;
+import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,62 +24,52 @@ import java.util.stream.Collectors;
 public class BookResServicelmpl implements BookResService {
     private final BookResRepository bookResRepository;
     private final ABookRepository aBookRepository;
-    private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public BookResResponseDto reserve(Long ano, Long sno) {
+    public BookResResponseDto reserve(Long ano, Long uno) { // 예약
         Optional<ABook> byAno = aBookRepository.findById(ano);
         if(byAno.isEmpty()) return null;
-        Optional<Student> bySno = studentRepository.findById(sno);
-        if(bySno.isEmpty()) return null;
-        BookRes bookRes = new BookRes();
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
+
+        BookRes bookRes = BookRes.builder().user(byUno.get()).build();
         bookRes.setABook(byAno.get());
-        bookRes.setStudent(bySno.get());
+
         ABook aBook = byAno.get();
-        aBook.setReserveType(Boolean.TRUE);
+        aBook.setReserveType(Boolean.TRUE); // 예약 중으로 저장
+
         aBookRepository.save(aBook);
         bookResRepository.save(bookRes);
         return toDto(bookRes);
     }
 
     @Override
-    public String cancel(Long brno) {
+    public String cancel(Long brno) { // 예약 취소
         Optional<BookRes> byBrno = bookResRepository.findById(brno);
         if (byBrno.isEmpty()) return "아이디가 존재하지 않습니다.";
+
         BookRes bookRes = byBrno.get();
+        bookRes.setReserveType();
+
         ABook aBook = bookRes.getABook();
-        aBook.setReserveType(Boolean.FALSE);
+        aBook.setReserveType(Boolean.FALSE); // 예약 취소로 저장
+
         aBookRepository.save(aBook);
-        bookResRepository.delete(bookRes);
+        bookResRepository.save(bookRes);
         return "취소되었습니다.";
     }
 
     @Override
-    public List<BookResResponseDto> findByStudent(Long sno) {
-        List<BookRes> bookResList = bookResRepository.findByStudent_sno(sno);
+    public List<BookResResponseDto> findByUser(Long uno) {  // 사용자별로 책 예약 현황 조회
+        List<BookRes> bookResList = bookResRepository.findByUser_uno(uno);
         return bookResList.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<BookResResponseDto> findByAll() {
-        List<BookRes> bookResList = bookResRepository.findAll();
-        return bookResList.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    public BookRes toEntity(BookResRequestDto bookResRequestDto) {
-        return BookRes.builder()
-                .brno(bookResRequestDto.getBrno())
-                .creDate(bookResRequestDto.getCreDate())
-                .aBook(bookResRequestDto.getABook())
-                .student(bookResRequestDto.getStudent())
-                .build();
     }
 
     public BookResResponseDto toDto(BookRes bookRes) {
         return BookResResponseDto.builder()
                 .brno(bookRes.getBrno())
                 .creDate(bookRes.getCreDate())
-                .studentName(bookRes.getStudent().getName())
                 .bookName(bookRes.getABook().getBook().getTitle())
                 .build();
     }

@@ -1,4 +1,4 @@
-package hallym.hashtag.domain.admin.dto;
+package hallym.hashtag.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminRequestDto {
-    private Long ano;
-
+public class UserRequestDto {
     private String name;
-
-    private String phone;
-
-    private Long employeeNum;
-
-    private String dep;
-
+    private String number;
     private String password;
+    private String phone;
+    private String department;
 }
