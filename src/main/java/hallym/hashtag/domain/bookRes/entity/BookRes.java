@@ -5,10 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.student.entity.Student;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import hallym.hashtag.domain.user.entity.User;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
+@Getter
 @Builder
 @Entity
 @Table(name = "bookRes")
@@ -36,11 +34,22 @@ public class BookRes {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sno")
-    private Student student;
+    @JoinColumn(name = "uno")
+    private User user;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creDate", updatable = false)
     private LocalDate creDate;
+
+    @ColumnDefault("false")
+    private Boolean reserveType; // false:예약 중, ture:예약취소
+
+    public void setABook(ABook aBook) {
+        this.aBook = aBook;
+    }
+
+    public void setReserveType() {
+        this.reserveType = Boolean.TRUE;
+    }
 }

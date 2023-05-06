@@ -20,8 +20,4 @@ public class BookResResponseDto {
     private LocalDate creDate;
 
     private String bookName;
-
-    private String studentName;
-
-    private List<String> useTimes = new ArrayList<>();
 }

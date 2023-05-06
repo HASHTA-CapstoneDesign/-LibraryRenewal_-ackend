@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface BookResRepository extends JpaRepository<BookRes, Long> {
-    @Query("select b from BookRes b where b.student.sno=:sno")
-    List<BookRes> findByStudent_sno(@Param("sno") Long sno);
+    @Query("select b from BookRes b where b.user.uno=:uno order by b.brno desc ")
+    List<BookRes> findByUser_uno(@Param("uno") Long uno);
 }
