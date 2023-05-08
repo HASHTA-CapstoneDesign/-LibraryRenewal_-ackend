@@ -2,12 +2,9 @@ package hallym.hashtag.domain.bookRes.service;
 
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
-import hallym.hashtag.domain.bookRes.dto.BookResRequestDto;
 import hallym.hashtag.domain.bookRes.dto.BookResResponseDto;
 import hallym.hashtag.domain.bookRes.entity.BookRes;
 import hallym.hashtag.domain.bookRes.repository.BookResRepository;
-import hallym.hashtag.domain.student.entity.Student;
-import hallym.hashtag.domain.student.repository.StudentRepository;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

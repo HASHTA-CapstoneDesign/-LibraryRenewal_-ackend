@@ -1,7 +1,6 @@
 package hallym.hashtag.domain.bookRes.dto;
 
 import hallym.hashtag.domain.abook.entity.ABook;
-import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

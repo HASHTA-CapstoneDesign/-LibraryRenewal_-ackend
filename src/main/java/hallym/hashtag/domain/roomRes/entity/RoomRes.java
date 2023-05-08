@@ -3,7 +3,6 @@ package hallym.hashtag.domain.roomRes.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hallym.hashtag.domain.room.entity.Room;
-import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.user.entity.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

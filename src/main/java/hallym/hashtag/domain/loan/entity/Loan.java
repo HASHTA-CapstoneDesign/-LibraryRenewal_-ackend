@@ -2,8 +2,6 @@ package hallym.hashtag.domain.loan.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.abook.entity.ABook;
-import hallym.hashtag.domain.book.entity.Book;
-import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.user.entity.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
