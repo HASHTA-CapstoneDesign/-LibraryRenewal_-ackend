@@ -20,7 +20,6 @@ public class BookServiceTest {
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
                 .bookPage(123L)
-                .bookType(BookType.철학)
                 .build();
         bookService.create(bookDto);
         System.out.println("----------생성 완료!----------");
@@ -48,7 +47,6 @@ public class BookServiceTest {
                 .isbn("1111")
                 .pudDate("2001년 05월 10일")
                 .bookPage(100L)
-                .bookType(BookType.철학)
                 .build();
 
         bookService.update(bno, bookDto);

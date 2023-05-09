@@ -4,8 +4,6 @@ import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
-import hallym.hashtag.domain.student.entity.Student;
-import hallym.hashtag.domain.student.repository.StudentRepository;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;

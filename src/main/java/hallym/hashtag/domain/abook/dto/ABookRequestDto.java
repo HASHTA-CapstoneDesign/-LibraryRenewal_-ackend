@@ -12,15 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ABookRequestDto {
-    private Long abno;
-
     private String tag;
-
-    private Book book;
-
-    private boolean loanType;
-
-    private boolean reserveType;
-
-    private Loan loan;
 }

@@ -5,18 +5,12 @@ import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.repository.BookRepository;
-import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
-import hallym.hashtag.domain.student.entity.Student;
-import hallym.hashtag.domain.student.repository.StudentRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @SpringBootTest
 public class BookRepositoryTest {
@@ -24,8 +18,6 @@ public class BookRepositoryTest {
     BookRepository bookRepository;
     @Autowired
     ABookRepository aBookRepository;
-    @Autowired
-    StudentRepository studentRepository;
     @Autowired
     LoanRepository loanRepository;
 

@@ -29,10 +29,4 @@ public class BookDto {
     private String pudDate;
 
     private Long bookPage;
-
-    private BookType bookType;
-
-    private int loanCount;
-
-    private List<ABook> aBooks;
 }
