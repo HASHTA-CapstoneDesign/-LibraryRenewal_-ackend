@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.loan.entity.Loan;
 import hallym.hashtag.global.baseEntity.BaseEntity;
+import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
