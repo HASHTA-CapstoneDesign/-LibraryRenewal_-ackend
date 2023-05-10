@@ -19,8 +19,7 @@ public class BookResController {
     @ApiOperation(value = "책 예약", notes = "대출 중인 책을 예약합니다.")
     @ApiImplicitParams(
             {
-                    @ApiImplicitParam(name = "uno", value = "유저 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
-                    ,
+                    @ApiImplicitParam(name = "uno", value = "유저 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class),
                     @ApiImplicitParam(name = "abno", value = "책 한권 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
             })
     @PostMapping("{uno}/{abno}")

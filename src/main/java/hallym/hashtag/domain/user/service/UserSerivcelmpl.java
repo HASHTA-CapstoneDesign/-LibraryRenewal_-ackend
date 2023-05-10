@@ -22,9 +22,6 @@ public class UserSerivcelmpl implements UserService{
         User user = toEntity(userRequestDto);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setPhone(bCryptPasswordEncoder.encode(user.getPhone()));
-        user.setDepartment(bCryptPasswordEncoder.encode(user.getDepartment()));
-        user.setName(bCryptPasswordEncoder.encode(user.getName()));
         user.setRoles("ROLE_ADMIN");
 
         userRepository.save(user);
