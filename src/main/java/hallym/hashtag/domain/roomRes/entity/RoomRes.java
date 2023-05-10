@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.user.entity.User;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class RoomRes {
 
     private String useData;
 
+    @ColumnDefault("true")
+    private Boolean reserve; //예약 여부
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -41,4 +45,6 @@ public class RoomRes {
     public void setRoom(Room room) {
         this.room = room;
     }
+
+    public void setReserve(Boolean reserve) { this.reserve = reserve; }
 }

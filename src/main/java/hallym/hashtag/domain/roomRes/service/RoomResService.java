@@ -5,4 +5,5 @@ import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 
 public interface RoomResService {
     RoomResResponseDto reserve(Long uno, Long rno, RoomResRequestDto roomResRequestDto);
+    String cancel(Long rrno);
 }

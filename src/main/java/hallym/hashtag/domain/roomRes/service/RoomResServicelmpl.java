@@ -38,6 +38,19 @@ public class RoomResServicelmpl implements RoomResService{
         return toDto(roomRes);
     }
 
+    @Override
+    public String cancel(Long rrno) {
+        Optional<RoomRes> byRrno = roomResRepository.findById(rrno);
+        if(byRrno.isEmpty()) return null;
+        RoomRes roomRes = byRrno.get();
+        roomRes.setReserve(Boolean.FALSE);
+        Room room = roomRes.getRoom();
+        room.setReserve(Boolean.FALSE);
+        roomRepository.save(room);
+        roomResRepository.save(roomRes);
+        return "취소되었습니다.";
+    }
+
     private RoomRes toEntity(RoomResRequestDto roomResRequestDto) {
         return RoomRes.builder()
                 .useTimes(roomResRequestDto.getUseTimes())

@@ -26,4 +26,11 @@ public class RoomResController {
                                       @RequestBody RoomResRequestDto roomResRequestDto) {
         return roomResService.reserve(uno, rno, roomResRequestDto);
     }
+
+    @ApiOperation(value = "스터디룸 예약 취소", notes = "스터시룸을 예약을 취소하는 api입니다.")
+    @ApiImplicitParam(name = "rrno", value = "스터디룸 예약 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
+    @PostMapping("{rrno}")
+    public String cancel(@PathVariable(name = "rrno") Long rrno) {
+        return roomResService.cancel(rrno);
+    }
 }

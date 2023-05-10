@@ -29,4 +29,11 @@ public class RoomResServiceTest {
 
         roomResService.reserve(uno, rno, roomResRequestDto);
     }
+
+    @Test
+    public void testCancel() {
+        Long rrno = 1L;
+
+        roomResService.cancel(rrno);
+    }
 }

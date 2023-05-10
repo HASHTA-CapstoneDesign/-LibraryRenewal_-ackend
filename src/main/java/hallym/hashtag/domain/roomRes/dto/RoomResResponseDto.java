@@ -20,4 +20,6 @@ public class RoomResResponseDto {
     private String useData;
 
     private List<String> useTimes = new ArrayList<>();
+
+    private Boolean reserve;
 }
