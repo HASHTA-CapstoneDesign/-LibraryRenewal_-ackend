@@ -7,7 +7,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,5 +35,12 @@ public class RoomResController {
     @PostMapping("{rrno}")
     public String cancel(@PathVariable(name = "rrno") Long rrno) {
         return roomResService.cancel(rrno);
+    }
+
+    @ApiOperation(value = "유저별 예약 현황 조회", notes = "유져별로 스터디룸 예약 현황을 볼 수 있습니다.")
+    @ApiImplicitParam(name = "uno", value = "유저 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
+    @GetMapping("{uno}")
+    public List<RoomResResponseDto> findByUser(@PathVariable("uno") Long uno) {
+        return roomResService.findByUser(uno);
     }
 }

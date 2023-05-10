@@ -1,6 +1,7 @@
 package hallym.hashtag.service;
 
 import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
+import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.service.RoomResService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,12 @@ public class RoomResServiceTest {
         Long rrno = 1L;
 
         roomResService.cancel(rrno);
+    }
+
+    @Test
+    public void testFindByUser() {
+        Long uno = 1L;
+        List<RoomResResponseDto> list = roomResService.findByUser(uno);
+//        System.out.println(list);
     }
 }

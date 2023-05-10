@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -49,6 +51,15 @@ public class RoomResServicelmpl implements RoomResService{
         roomRepository.save(room);
         roomResRepository.save(roomRes);
         return "취소되었습니다.";
+    }
+
+    @Override
+    public List<RoomResResponseDto> findByUser(Long uno) {
+        Optional<User> byUno = userRepository.findById(uno);
+        if(byUno.isEmpty()) return null;
+        List<RoomRes> roomResList = roomResRepository.FindByUser_uno(uno);
+        return roomResList.stream().map(this::toDto).collect(Collectors.toList());
+
     }
 
     private RoomRes toEntity(RoomResRequestDto roomResRequestDto) {
