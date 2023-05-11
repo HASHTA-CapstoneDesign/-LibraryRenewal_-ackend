@@ -3,7 +3,12 @@ package hallym.hashtag.domain.book.service;
 import hallym.hashtag.domain.book.dto.BookDto;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.book.repository.BookRepository;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,9 +30,21 @@ public class BookServicelmpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll() {
-        List<Book> bookList = bookRepository.findAll();
-        return bookList.stream().map(this::toDto).collect(Collectors.toList());
+    public PageResponseDto<BookDto> findAll(PageRequestDto pageRequestDto) {
+        Pageable pageable = PageRequest.of(pageRequestDto.getPage() <=0? 0:
+                        pageRequestDto.getPage()-1,
+                pageRequestDto.getSize());
+
+        Page<Book> bookList = bookRepository.findAll(pageable);
+
+        List<BookDto> dtoList = bookList.getContent()
+                .stream().map(this::toDto).collect(Collectors.toList());
+
+        return PageResponseDto.<BookDto>withAll()
+                .pageRequestDto(pageRequestDto)
+                .dtoList(dtoList)
+                .total((int)bookList.getTotalElements())
+                .build();
     }
 
     @Override

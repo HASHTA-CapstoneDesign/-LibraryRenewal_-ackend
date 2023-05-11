@@ -3,6 +3,8 @@ package hallym.hashtag.service;
 import hallym.hashtag.domain.book.dto.BookDto;
 import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.service.BookService;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +29,9 @@ public class BookServiceTest {
 
     @Test
     public void bookFindAll() {
-        bookService.findAll();
+        PageRequestDto pageRequestDto = PageRequestDto.builder()
+                .page(1).size(10).build();
+        PageResponseDto<BookDto> responseDto = bookService.findAll(pageRequestDto);
         System.out.println("----------조회 완료!----------");
     }
 
