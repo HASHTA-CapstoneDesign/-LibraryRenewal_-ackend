@@ -1,7 +1,6 @@
 package hallym.hashtag.service;
 
 import hallym.hashtag.domain.book.dto.BookDto;
-import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.service.BookService;
 import hallym.hashtag.global.baseDto.PageRequestDto;
 import hallym.hashtag.global.baseDto.PageResponseDto;

@@ -3,7 +3,6 @@ package hallym.hashtag.repository;
 import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
-import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.repository.BookRepository;
 import hallym.hashtag.domain.loan.repostory.LoanRepository;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +29,6 @@ public class BookRepositoryTest {
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
                 .bookPage(123L)
-                .bookType(BookType.철학)
                 .build();
         bookRepository.save(book);
 
@@ -56,7 +54,6 @@ public class BookRepositoryTest {
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
                 .bookPage(123L)
-                .bookType(BookType.철학)
                 .build();
         bookRepository.save(book);
 

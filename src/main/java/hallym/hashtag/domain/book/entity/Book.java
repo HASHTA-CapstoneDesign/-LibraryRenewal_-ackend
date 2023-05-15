@@ -37,8 +37,6 @@ public class Book extends BaseEntity {
 
     private Long bookPage;
 
-    private BookType bookType;
-
     @Builder.Default
     private int loanCount = 0;
 
@@ -58,6 +56,5 @@ public class Book extends BaseEntity {
         this.isbn = book.isbn;
         this.pudDate = book.pudDate;
         this.bookPage = book.bookPage;
-        this.bookType = book.bookType;
     }
 }

@@ -14,7 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @SpringBootTest
-public class CsvFileSave {
+public class csvSave {
     @Autowired
     UserRepository userRepository;
     @Autowired
