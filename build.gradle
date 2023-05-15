@@ -35,6 +35,8 @@ dependencies {
 
 	implementation 'mysql:mysql-connector-java:8.0.32'
 
+	implementation 'com.opencsv:opencsv:5.5.2'
+
 }
 
 tasks.named('test') {
