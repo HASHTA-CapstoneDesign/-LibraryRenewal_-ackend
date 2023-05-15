@@ -20,7 +20,6 @@ public class BookServiceTest {
                 .author("김미진")
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
-                .bookPage(123L)
                 .build();
         bookService.create(bookDto);
         System.out.println("----------생성 완료!----------");
@@ -49,7 +48,6 @@ public class BookServiceTest {
                 .author("김선아")
                 .isbn("1111")
                 .pudDate("2001년 05월 10일")
-                .bookPage(100L)
                 .build();
 
         bookService.update(bno, bookDto);

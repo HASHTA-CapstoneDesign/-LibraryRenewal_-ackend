@@ -3,6 +3,10 @@ package hallym.hashtag.csvSave;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import hallym.hashtag.domain.abook.entity.ABook;
+import hallym.hashtag.domain.abook.repostory.ABookRepository;
+import hallym.hashtag.domain.book.entity.Book;
+import hallym.hashtag.domain.book.repository.BookRepository;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
 
 @SpringBootTest
 public class csvSave {
@@ -19,6 +24,10 @@ public class csvSave {
     UserRepository userRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    BookRepository bookRepository;
+    @Autowired
+    ABookRepository aBookRepository;
 
     @Test
     public void UserSave() throws CsvValidationException, IOException {
@@ -36,7 +45,32 @@ public class csvSave {
 
             userRepository.save(u);
         }
+    }
 
+    @Test
+    public void bookSave() throws IOException, CsvValidationException {
+        String url = "C:/study/project/LibraryRenewal_backend/src/main/resources/data/bookdata.csv";
+
+        CSVReader reader = new CSVReaderBuilder(new FileReader(url))
+                .withSkipLines(1)
+                .build();
+
+        //SEQ_NO,ISBN_THIRTEEN_NO,TITLE_NM,AUTHR_NM,PUBLISHER_NM,PBLICTE_DE,IMAGE_URL,BOOK_INTRCN_CN,KDC_NM
+
+        String[] line;
+        int i= 1;
+        while ((line = reader.readNext()) != null) {
+            Book b = Book.builder().tag(Long.valueOf(line[1])).isbn(line[1]).title(line[2])
+                    .author(line[3]).pud(line[4]).pudDate(line[5]).image(line[6])
+                    .build();
+
+            Book book = bookRepository.save(b);
+
+            ABook aBook = ABook.builder().tag(String.valueOf(i)).book(book).build();
+            i++;
+
+            aBookRepository.save(aBook);
+        }
 
     }
 }

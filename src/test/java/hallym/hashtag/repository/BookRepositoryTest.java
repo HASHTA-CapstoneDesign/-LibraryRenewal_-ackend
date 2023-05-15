@@ -28,7 +28,6 @@ public class BookRepositoryTest {
                 .author("김미진")
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
-                .bookPage(123L)
                 .build();
         bookRepository.save(book);
 
@@ -53,7 +52,6 @@ public class BookRepositoryTest {
                 .author("김미진")
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
-                .bookPage(123L)
                 .build();
         bookRepository.save(book);
 

@@ -22,5 +22,7 @@ public class BookDto {
 
     private String pudDate;
 
-    private Long bookPage;
+    private String image;
+
+    private String pud;
 }
