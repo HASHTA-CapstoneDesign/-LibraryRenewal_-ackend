@@ -60,6 +60,8 @@ public class csvSave {
         String[] line;
         int i= 1;
         while ((line = reader.readNext()) != null) {
+            if(i == 10) break;
+
             Book b = Book.builder().tag(Long.valueOf(line[1])).isbn(line[1]).title(line[2])
                     .author(line[3]).pud(line[4]).pudDate(line[5]).image(line[6])
                     .build();
