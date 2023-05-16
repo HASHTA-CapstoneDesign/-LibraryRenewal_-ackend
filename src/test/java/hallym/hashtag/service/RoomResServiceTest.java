@@ -1,7 +1,7 @@
 package hallym.hashtag.service;
 
 import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
-import hallym.hashtag.domain.roomRes.entity.UseTime;
+import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.service.RoomResService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +17,31 @@ public class RoomResServiceTest {
 
     @Test
     public void testReserve() {
-        Long sno = 1L;
+        Long uno = 1L;
         Long rno = 1L;
 
-        List<UseTime> useTimes = new ArrayList<>();
-        useTimes.add(UseTime.builder().time("09:00-10:00").build());
-        useTimes.add(UseTime.builder().time("10:00-11:00").build());
+        List<String> useTimes = new ArrayList<>();
+        useTimes.add("09:00-10:00");
 
         RoomResRequestDto roomResRequestDto = RoomResRequestDto.builder()
-                .useDate("2023-05-10")
+                .useData("2023-05-10")
                 .useTimes(useTimes)
                 .build();
 
-        roomResService.reserve(sno, rno, roomResRequestDto);
+        roomResService.reserve(uno, rno, roomResRequestDto);
+    }
+
+    @Test
+    public void testCancel() {
+        Long rrno = 1L;
+
+        roomResService.cancel(rrno);
+    }
+
+    @Test
+    public void testFindByUser() {
+        Long uno = 1L;
+        List<RoomResResponseDto> list = roomResService.findByUser(uno);
+//        System.out.println(list);
     }
 }

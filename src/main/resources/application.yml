@@ -1,9 +1,11 @@
 spring:
+  profiles:
+    include: "local"
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/hashtag
-    username: hashtag
-    password: hashtag11
+    url: ${spring.datasource.url}
+    driverClassName: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
 
   jpa:
     open-in-view: true

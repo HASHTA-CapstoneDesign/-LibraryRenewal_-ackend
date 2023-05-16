@@ -1,15 +1,9 @@
 package hallym.hashtag.domain.book.dto;
 
-import hallym.hashtag.domain.abook.entity.ABook;
-import hallym.hashtag.domain.book.entity.BookType;
-import hallym.hashtag.domain.loan.entity.Loan;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Builder
@@ -28,11 +22,7 @@ public class BookDto {
 
     private String pudDate;
 
-    private Long bookPage;
+    private String image;
 
-    private BookType bookType;
-
-    private int loanCount;
-
-    private List<ABook> aBooks;
+    private String pud;
 }

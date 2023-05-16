@@ -35,9 +35,9 @@ public class Book extends BaseEntity {
 
     private String pudDate;
 
-    private Long bookPage;
+    private String pud;
 
-    private BookType bookType;
+    private String image;
 
     @Builder.Default
     private int loanCount = 0;
@@ -57,7 +57,5 @@ public class Book extends BaseEntity {
         this.author = book.author;
         this.isbn = book.isbn;
         this.pudDate = book.pudDate;
-        this.bookPage = book.bookPage;
-        this.bookType = book.bookType;
     }
 }

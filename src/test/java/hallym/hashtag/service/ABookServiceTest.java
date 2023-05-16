@@ -15,7 +15,7 @@ public class ABookServiceTest {
 
     @Test
     public void ABookCreate() {
-        Long bno = 1L;
+        Long bno = 2L;
 
         IntStream.rangeClosed(1,5).forEach(i -> {
             ABookRequestDto aBookRequestDto = ABookRequestDto.builder()

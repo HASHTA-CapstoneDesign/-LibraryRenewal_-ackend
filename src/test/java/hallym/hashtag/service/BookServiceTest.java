@@ -1,8 +1,9 @@
 package hallym.hashtag.service;
 
 import hallym.hashtag.domain.book.dto.BookDto;
-import hallym.hashtag.domain.book.entity.BookType;
 import hallym.hashtag.domain.book.service.BookService;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,8 +20,6 @@ public class BookServiceTest {
                 .author("김미진")
                 .isbn("1111")
                 .pudDate("2001년 07월 21일")
-                .bookPage(123L)
-                .bookType(BookType.철학)
                 .build();
         bookService.create(bookDto);
         System.out.println("----------생성 완료!----------");
@@ -28,7 +27,9 @@ public class BookServiceTest {
 
     @Test
     public void bookFindAll() {
-        bookService.findAll();
+        PageRequestDto pageRequestDto = PageRequestDto.builder()
+                .page(1).size(10).build();
+        PageResponseDto<BookDto> responseDto = bookService.findAll(pageRequestDto);
         System.out.println("----------조회 완료!----------");
     }
 
@@ -47,8 +48,6 @@ public class BookServiceTest {
                 .author("김선아")
                 .isbn("1111")
                 .pudDate("2001년 05월 10일")
-                .bookPage(100L)
-                .bookType(BookType.철학)
                 .build();
 
         bookService.update(bno, bookDto);

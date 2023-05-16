@@ -1,32 +1,24 @@
 package hallym.hashtag.domain.roomRes.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hallym.hashtag.domain.room.entity.Room;
-import hallym.hashtag.domain.student.entity.Student;
 import hallym.hashtag.domain.user.entity.User;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
-@Builder
-@Entity
-@Table(name = "roomRes")
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(value = { AuditingEntityListener.class })
+@Builder
+@Entity
 public class RoomRes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rrno;
-
-    private String useDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,20 +30,21 @@ public class RoomRes {
     @JoinColumn(name = "rno")
     private Room room;
 
-    @CreatedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "creDate", updatable = false)
-    private LocalDate creDate;
+    @ElementCollection
+    private List<String> useTimes = new ArrayList<>();
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "roomRes", fetch = FetchType.LAZY)
-    private List<UseTime> useTimes = new ArrayList<>();
+    private String useData;
+
+    @ColumnDefault("true")
+    private Boolean reserve; //예약 여부
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setRoom(Room room) {
         this.room = room;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setReserve(Boolean reserve) { this.reserve = reserve; }
 }

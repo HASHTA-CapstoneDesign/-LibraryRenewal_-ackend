@@ -25,8 +25,8 @@ public class ABookServicelmpl implements ABookService {
     public ABookResponseDto create(Long bno, ABookRequestDto aBookRequestDto) {
         Optional<Book> byId = bookRepository.findById(bno);
         if(byId.isEmpty()) return null;
-        aBookRequestDto.setBook(byId.get());
         ABook newABook = toEntity(aBookRequestDto);
+        newABook.setBook(byId.get());
         aBookRepository.save(newABook);
         return toDto(newABook);
     }
@@ -43,11 +43,7 @@ public class ABookServicelmpl implements ABookService {
 
     public ABook toEntity(ABookRequestDto aBookRequestDto){
         return ABook.builder()
-                .abno(aBookRequestDto.getAbno())
                 .tag(aBookRequestDto.getTag())
-                .loanType(aBookRequestDto.isLoanType())
-                .book(aBookRequestDto.getBook())
-                .reserveType(aBookRequestDto.isReserveType())
                 .build();
     }
 
