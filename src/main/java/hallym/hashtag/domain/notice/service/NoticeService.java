@@ -11,4 +11,6 @@ public interface NoticeService {
     PageResponseDto<NoticeResponseDto> findAll(PageRequestDto pageRequestDto);
 
     PageResponseDto<NoticeResponseDto> search(String keyword, PageRequestDto pageRequestDto);
+
+    List<NoticeResponseDto> findByImportant();
 }

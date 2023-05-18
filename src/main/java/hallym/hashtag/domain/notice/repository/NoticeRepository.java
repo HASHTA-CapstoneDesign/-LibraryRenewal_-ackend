@@ -18,4 +18,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
     @Query("select n from Notice n where n.title LIKE %:keyword% or n.content LIKE %:keyword% order by n.important desc , n.nno desc ")
     Page<Notice> search(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query("select n from Notice n where n.important=:important order by n.nno desc ")
+    List<Notice> findAllByImportant(@Param("important") Boolean important);
 }

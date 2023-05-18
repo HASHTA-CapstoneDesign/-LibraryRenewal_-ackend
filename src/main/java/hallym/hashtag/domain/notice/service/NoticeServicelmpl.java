@@ -62,6 +62,12 @@ public class NoticeServicelmpl implements NoticeService{
         }
     }
 
+    @Override
+    public List<NoticeResponseDto> findByImportant() {
+        List<Notice> noticeList = noticeRepository.findAllByImportant(Boolean.TRUE);
+        return noticeList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
     public NoticeResponseDto toDto(Notice notice) {
         return NoticeResponseDto.builder()
                 .nno(notice.getNno())

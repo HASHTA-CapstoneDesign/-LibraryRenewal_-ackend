@@ -27,8 +27,14 @@ public class NoticeController {
 
     @ApiOperation(value = "공지사항 검색", notes = "공지사항 검색합니다." +
             "이미지와 페이징이 추가됩니다.")
-    @GetMapping
+    @GetMapping("search")
     public PageResponseDto<NoticeResponseDto> noticeSearch(@RequestParam(value = "keyword") String keyword, PageRequestDto pageRequestDto){
         return noticeService.search(keyword, pageRequestDto);
+    }
+
+    @ApiOperation(value = "중요한 공지사항만 조회", notes = "중요한 공지사항 조회합니다.")
+    @GetMapping("important")
+    public List<NoticeResponseDto> noticeFindByImportant() {
+        return noticeService.findByImportant();
     }
 }
