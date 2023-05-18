@@ -23,13 +23,6 @@ public class BookServicelmpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public BookDto create(BookDto bookDto) {
-        Book newBook = toEntity(bookDto);
-        bookRepository.save(newBook);
-        return toDto(newBook);
-    }
-
-    @Override
     public PageResponseDto<BookDto> findAll(PageRequestDto pageRequestDto) {
         Pageable pageable = PageRequest.of(pageRequestDto.getPage() <=0? 0:
                         pageRequestDto.getPage()-1,
@@ -48,36 +41,6 @@ public class BookServicelmpl implements BookService {
     }
 
     @Override
-    public BookDto findByOne(Long bno) {
-        Optional<Book> byBno = bookRepository.findById(bno);
-        if(byBno.isEmpty())
-            return null;
-        Book book = byBno.get();
-        return toDto(book);
-    }
-
-    @Override
-    public BookDto update(Long bno, BookDto bookDto) {
-        Optional<Book> byBno = bookRepository.findById(bno);
-        if(byBno.isEmpty())
-            return null;
-        Book book = byBno.get();
-        book.updateBook(toEntity(bookDto));
-        bookRepository.save(book);
-        return toDto(book);
-    }
-
-    @Override
-    public String delete(Long bno) {
-        Optional<Book> byBno = bookRepository.findById(bno);
-        if(byBno.isEmpty())
-            return "ID가 없습니다.";
-        Book book = byBno.get();
-        bookRepository.delete(book);
-        return "삭제되었습니다.";
-    }
-
-    @Override
     public List<BookDto> findAllRestDateDesc() {
         List<Book> bookList = bookRepository.findAllRegDateDesc();
         return bookList.stream().map(this::toDto).collect(Collectors.toList());
@@ -87,19 +50,6 @@ public class BookServicelmpl implements BookService {
     public List<BookDto> findAllByLoanCount() {
         List<Book> bookList = bookRepository.findAllByLoanCount();
         return bookList.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    public Book toEntity(BookDto bookDto) {
-        return Book.builder()
-                .bno(bookDto.getBno())
-                .tag(bookDto.getTag())
-                .title(bookDto.getTitle())
-                .author(bookDto.getAuthor())
-                .isbn(bookDto.getIsbn())
-                .pudDate(bookDto.getPudDate())
-                .image(bookDto.getImage())
-                .pud(bookDto.getPud())
-                .build();
     }
 
     public BookDto toDto(Book book) {

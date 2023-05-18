@@ -7,15 +7,8 @@ import hallym.hashtag.global.baseDto.PageResponseDto;
 import java.util.List;
 
 public interface BookService {
-    BookDto create(BookDto bookDto);
 
     PageResponseDto<BookDto> findAll(PageRequestDto pageRequestDto) ;
-
-    BookDto findByOne(Long bno);
-
-    BookDto update(Long bno, BookDto bookDto);
-
-    String delete(Long bno);
 
     List<BookDto> findAllRestDateDesc();
 

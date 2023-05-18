@@ -50,12 +50,4 @@ public class Book extends BaseEntity {
     public void updateLoanCounting() {
         this.loanCount++;
     }
-
-    public void updateBook(Book book) {
-//        BeanUtils.copyProperties(book, this);
-        this.title = book.title;
-        this.author = book.author;
-        this.isbn = book.isbn;
-        this.pudDate = book.pudDate;
-    }
 }
