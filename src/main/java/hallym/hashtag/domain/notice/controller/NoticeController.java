@@ -25,13 +25,6 @@ public class NoticeController {
         return noticeService.findAll(pageRequestDto);
     }
 
-    @ApiOperation(value = "공지사항 상세 조회", notes = "공지사항 상세 조회 합니다.")
-    @ApiImplicitParam(name = "nno", value = "공지사항 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
-    @GetMapping("{nno}")
-    public NoticeResponseDto noticeFindByOne(@PathVariable(name = "nno") Long nno) {
-        return noticeService.findByOne(nno);
-    }
-
     @ApiOperation(value = "공지사항 검색", notes = "공지사항 검색합니다." +
             "이미지와 페이징이 추가됩니다.")
     @GetMapping

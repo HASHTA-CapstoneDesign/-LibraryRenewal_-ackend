@@ -42,14 +42,6 @@ public class NoticeServicelmpl implements NoticeService{
     }
 
     @Override
-    public NoticeResponseDto findByOne(Long nno) {
-        Optional<Notice> byNno = noticeRepository.findById(nno);
-        if(byNno.isEmpty()) return null;
-        Notice notice = byNno.get();
-        return toDto(notice);
-    }
-
-    @Override
     public PageResponseDto<NoticeResponseDto> search(String keyword, PageRequestDto pageRequestDto) {
         Pageable pageable = PageRequest.of(pageRequestDto.getPage() <=0? 0:
                         pageRequestDto.getPage()-1,

@@ -10,7 +10,5 @@ public interface NoticeService {
 
     PageResponseDto<NoticeResponseDto> findAll(PageRequestDto pageRequestDto);
 
-    NoticeResponseDto findByOne(Long nno);
-
     PageResponseDto<NoticeResponseDto> search(String keyword, PageRequestDto pageRequestDto);
 }
