@@ -45,10 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                .antMatchers("/user/**")
 //                .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/manager/**")
-                .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/admin/**")
-                .access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/manager/**")
+//                .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+//                .antMatchers("/admin/**")
+//                .access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
     }
 }
