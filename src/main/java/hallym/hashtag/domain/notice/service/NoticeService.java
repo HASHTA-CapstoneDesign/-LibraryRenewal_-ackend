@@ -1,14 +1,16 @@
 package hallym.hashtag.domain.notice.service;
 
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 
 import java.util.List;
 
 public interface NoticeService {
 
-    List<NoticeResponseDto> findAll();
+    PageResponseDto<NoticeResponseDto> findAll(PageRequestDto pageRequestDto);
 
     NoticeResponseDto findByOne(Long nno);
 
-    List<NoticeResponseDto> search(String keyword);
+    PageResponseDto<NoticeResponseDto> search(String keyword, PageRequestDto pageRequestDto);
 }

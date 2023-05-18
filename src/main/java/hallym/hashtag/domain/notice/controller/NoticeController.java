@@ -2,6 +2,8 @@ package hallym.hashtag.domain.notice.controller;
 
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
 import hallym.hashtag.domain.notice.service.NoticeService;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,8 @@ public class NoticeController {
             "중요도와 시간 순으로 정렬하여 조회합니다." +
             "이미지와 페이징이 추가됩니다.")
     @GetMapping("list")
-    public List<NoticeResponseDto> noticeFindAll() {
-        return noticeService.findAll();
+    public PageResponseDto<NoticeResponseDto> noticeFindAll(PageRequestDto pageRequestDto) {
+        return noticeService.findAll(pageRequestDto);
     }
 
     @ApiOperation(value = "공지사항 상세 조회", notes = "공지사항 상세 조회 합니다.")
@@ -33,7 +35,7 @@ public class NoticeController {
     @ApiOperation(value = "공지사항 검색", notes = "공지사항 검색합니다." +
             "이미지와 페이징이 추가됩니다.")
     @GetMapping
-    public List<NoticeResponseDto> noticeSearch(@RequestParam(value = "keyword") String keyword){
-        return noticeService.search(keyword);
+    public PageResponseDto<NoticeResponseDto> noticeSearch(@RequestParam(value = "keyword") String keyword, PageRequestDto pageRequestDto){
+        return noticeService.search(keyword, pageRequestDto);
     }
 }
