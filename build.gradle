@@ -37,6 +37,9 @@ dependencies {
 
 	implementation 'com.opencsv:opencsv:5.5.2'
 
+	// jsoup HTML parser library @ https://jsoup.org/
+	implementation 'org.jsoup:jsoup:1.16.1'
+
 }
 
 tasks.named('test') {

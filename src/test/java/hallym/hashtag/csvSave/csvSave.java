@@ -49,7 +49,7 @@ public class csvSave {
 
     @Test
     public void bookSave() throws IOException, CsvValidationException {
-        String url = "C:/study/project/LibraryRenewal_backend/src/main/resources/data/bookdata.csv";
+        String url = "C:/study/project/LibraryRenewal_backend/src/main/resources/data/bookdata2.csv";
 
         CSVReader reader = new CSVReaderBuilder(new FileReader(url))
                 .withSkipLines(1)
@@ -60,7 +60,7 @@ public class csvSave {
         String[] line;
         int i= 1;
         while ((line = reader.readNext()) != null) {
-            if(i == 10) break;
+//            if(i == 10) break;
 
             Book b = Book.builder().tag(Long.valueOf(line[1])).isbn(line[1]).title(line[2])
                     .author(line[3]).pud(line[4]).pudDate(line[5]).image(line[6])

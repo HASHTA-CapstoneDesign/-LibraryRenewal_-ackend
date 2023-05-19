@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -33,5 +34,10 @@ public class BookController {
     @GetMapping("popular")
     public List<BookDto> bookFindAllLoanCount() {
         return bookService.findAllByLoanCount();
+    }
+
+    @GetMapping("recommend")
+    public List<BookDto> bookFindAllRecommend() throws IOException {
+        return bookService.findAllByRecommend();
     }
 }
