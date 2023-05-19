@@ -1,11 +1,15 @@
 package hallym.hashtag.domain.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.global.baseEntity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,16 +28,14 @@ public class Notice extends BaseEntity {
 
     private boolean important;
 
-    @Embedded
+    @JsonManagedReference
+    @OneToOne(mappedBy = "notice", fetch = FetchType.LAZY)
     private NoticeImage image;
+
+    private String imageFileName;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uno")
     private User user;
-
-    public void update(Notice notice) {
-        this.title = notice.title;
-        this.content = notice.content;
-    }
 }

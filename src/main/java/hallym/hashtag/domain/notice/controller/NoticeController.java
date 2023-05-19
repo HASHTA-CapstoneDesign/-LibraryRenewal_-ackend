@@ -1,6 +1,11 @@
 package hallym.hashtag.domain.notice.controller;
 
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
+import hallym.hashtag.domain.notice.entity.Notice;
+import hallym.hashtag.domain.notice.entity.NoticeImage;
+import hallym.hashtag.domain.notice.repository.NoticeImageRepository;
+import hallym.hashtag.domain.notice.repository.NoticeRepository;
+import hallym.hashtag.domain.notice.service.NoticeImageService;
 import hallym.hashtag.domain.notice.service.NoticeService;
 import hallym.hashtag.global.baseDto.PageRequestDto;
 import hallym.hashtag.global.baseDto.PageResponseDto;
@@ -16,12 +21,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/notice")
 public class NoticeController {
     private final NoticeService noticeService;
+    private final NoticeImageService noticeImageService;
+    private final NoticeRepository noticeRepository;
 
     @ApiOperation(value = "공지사항 전체 조회", notes = "공지사항 전체 조회 합니다." +
             "중요도와 시간 순으로 정렬하여 조회합니다." +
@@ -44,11 +52,8 @@ public class NoticeController {
         return noticeService.findByImportant();
     }
 
-    @GetMapping(value = "image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> userSearch(@PathVariable("imagename") String imagename) throws IOException {
-        InputStream imageStream = new FileInputStream("C:/study/project/image/" + imagename);
-        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-        imageStream.close();
-        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+    @GetMapping(value = "image/{nno}" , produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> userSearch(@PathVariable("nno") Long nno) throws IOException {
+        return new ResponseEntity<byte[]>(noticeImageService.findImage(nno), HttpStatus.OK);
     }
 }

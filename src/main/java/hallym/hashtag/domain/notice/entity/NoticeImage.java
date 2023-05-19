@@ -1,22 +1,30 @@
 package hallym.hashtag.domain.notice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Embeddable
+@Entity
+@Builder
 public class NoticeImage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long nino;
+
     @Column(nullable = false)
     private String fileName;
 
-    @Column(nullable = false)
-    private String fileOriName;
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nno")
+    private Notice notice;
 
-    @Column(nullable = false)
-    private String fileUrl;
+    public void setNotice(Notice notice) {
+        this.notice = notice;
+    }
 }
