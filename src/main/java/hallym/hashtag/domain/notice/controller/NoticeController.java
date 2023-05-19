@@ -4,11 +4,17 @@ import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
 import hallym.hashtag.domain.notice.service.NoticeService;
 import hallym.hashtag.global.baseDto.PageRequestDto;
 import hallym.hashtag.global.baseDto.PageResponseDto;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -36,5 +42,13 @@ public class NoticeController {
     @GetMapping("important")
     public List<NoticeResponseDto> noticeFindByImportant() {
         return noticeService.findByImportant();
+    }
+
+    @GetMapping(value = "image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> userSearch(@PathVariable("imagename") String imagename) throws IOException {
+        InputStream imageStream = new FileInputStream("C:/study/project/image/" + imagename);
+        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+        imageStream.close();
+        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
     }
 }

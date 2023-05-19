@@ -24,6 +24,9 @@ public class Notice extends BaseEntity {
 
     private boolean important;
 
+    @Embedded
+    private NoticeImage image;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uno")
