@@ -30,9 +30,6 @@ public class RoomRes {
     @JoinColumn(name = "rno")
     private Room room;
 
-    @ElementCollection
-    private List<String> useTimes = new ArrayList<>();
-
     private String useData;
 
     @ColumnDefault("true")

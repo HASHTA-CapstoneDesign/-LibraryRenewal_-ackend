@@ -64,7 +64,6 @@ public class RoomResServicelmpl implements RoomResService{
 
     private RoomRes toEntity(RoomResRequestDto roomResRequestDto) {
         return RoomRes.builder()
-                .useTimes(roomResRequestDto.getUseTimes())
                 .useData(roomResRequestDto.getUseData())
                 .build();
     }
@@ -73,7 +72,6 @@ public class RoomResServicelmpl implements RoomResService{
         return RoomResResponseDto.builder()
                 .rrno(roomRes.getRrno())
                 .roomName(roomRes.getRoom().getName())
-                .useTimes(roomRes.getUseTimes())
                 .useData(roomRes.getUseData())
                 .build();
 
