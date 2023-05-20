@@ -16,10 +16,4 @@ public class RoomDto {
     private Floor floor;
 
     private String name;
-
-    private String content;
-
-    private boolean studyRoom;
-
-    private boolean reserve;
 }

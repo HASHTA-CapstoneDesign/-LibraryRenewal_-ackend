@@ -23,16 +23,4 @@ public class Room {
     private Floor floor;
 
     private String name;
-
-    private String content;
-
-    @ColumnDefault("false")
-    private boolean studyRoom;
-
-    @ColumnDefault("false")
-    private boolean reserve;
-
-    public void setReserve(boolean reserve) {
-        this.reserve = reserve;
-    }
 }
