@@ -31,10 +31,6 @@ public class RoomResServicelmpl implements RoomResService{
         if(byUno.isEmpty()) return null;
         roomRes.setUser(byUno.get());
         Optional<Room> byRno = roomRepository.findById(rno);
-        if(byRno.isEmpty()) return null;
-        Room room = byRno.get();
-        room.setReserve(Boolean.TRUE);
-        roomRepository.save(room);
         roomRes.setRoom(byRno.get());
         roomResRepository.save(roomRes);
         return toDto(roomRes);
@@ -46,9 +42,6 @@ public class RoomResServicelmpl implements RoomResService{
         if(byRrno.isEmpty()) return null;
         RoomRes roomRes = byRrno.get();
         roomRes.setReserve(Boolean.FALSE);
-        Room room = roomRes.getRoom();
-        room.setReserve(Boolean.FALSE);
-        roomRepository.save(room);
         roomResRepository.save(roomRes);
         return "취소되었습니다.";
     }
