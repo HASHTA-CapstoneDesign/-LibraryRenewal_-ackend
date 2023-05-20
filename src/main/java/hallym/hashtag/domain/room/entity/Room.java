@@ -1,14 +1,11 @@
 package hallym.hashtag.domain.room.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
-@Data
+@Getter
 @Builder
 @Entity
 @Table(name = "room")
@@ -23,4 +20,21 @@ public class Room {
     private Floor floor;
 
     private String name;
+
+    private String useData;
+
+    private String useTime;
+
+    @Enumerated(value = EnumType.STRING)
+    private Reserve reserve;
+
+    public void setReserve(Reserve reserve) {
+        this.reserve = reserve;
+    }
+
+    public enum Reserve {
+        예약가능, 예약불가
+    }
 }
+
+

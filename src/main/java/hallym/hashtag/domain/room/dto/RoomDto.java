@@ -16,4 +16,8 @@ public class RoomDto {
     private Floor floor;
 
     private String name;
+
+    private String useData;
+
+    private String useTime;
 }
