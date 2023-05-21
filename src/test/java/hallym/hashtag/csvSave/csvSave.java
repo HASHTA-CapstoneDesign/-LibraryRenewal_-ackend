@@ -12,18 +12,14 @@ import hallym.hashtag.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Optional;
 
 @SpringBootTest
 public class csvSave {
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     BookRepository bookRepository;
     @Autowired
@@ -41,8 +37,8 @@ public class csvSave {
         while ((line = reader.readNext()) != null) {
             User u = User.builder().name(line[0]).number(line[1])
                     .phone(line[2]).department(line[3]).roles(line[4])
-                    .password(bCryptPasswordEncoder.encode(line[5])).build();
-
+                    .build();
+//bCryptPasswordEncoder.encode(line[5])
             userRepository.save(u);
         }
     }
@@ -60,7 +56,7 @@ public class csvSave {
         String[] line;
         int i= 1;
         while ((line = reader.readNext()) != null) {
-//            if(i == 10) break;
+            if(i == 10) break;
 
             Book b = Book.builder().tag(Long.valueOf(line[1])).isbn(line[1]).title(line[2])
                     .author(line[3]).pud(line[4]).pudDate(line[5]).image(line[6])

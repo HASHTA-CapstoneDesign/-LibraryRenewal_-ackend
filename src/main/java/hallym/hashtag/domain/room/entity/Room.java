@@ -1,9 +1,11 @@
 package hallym.hashtag.domain.room.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -23,18 +25,33 @@ public class Room {
 
     private String useData;
 
-    private String useTime;
+    @Builder.Default
+    @JsonManagedReference
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<RoomUseTime> roomUseTimes = new ArrayList<>();
 
-    @Enumerated(value = EnumType.STRING)
-    private Reserve reserve;
+    public void setRoomUseTimes(List<RoomUseTime> roomUseTimes) {
+        this.roomUseTimes = roomUseTimes;
+    }
+    public enum Floor {
+        floor1("2층 스터디룸"),
+        floor2("3층"),
+        floor3("4층(디지털스터디룸)"),
+        floor4("4층 C.Square"),
+        floor5("5층");
 
-    public void setReserve(Reserve reserve) {
-        this.reserve = reserve;
+
+        private final String label;
+
+        Floor(String label) {
+            this.label = label;
+        }
+
+        public String label() {
+            return label;
+        }
     }
 
-    public enum Reserve {
-        예약가능, 예약불가
-    }
 }
 
 
