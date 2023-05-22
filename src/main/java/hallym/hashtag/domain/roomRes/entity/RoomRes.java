@@ -53,4 +53,8 @@ public class RoomRes {
     @Builder.Default
     @Enumerated(value = EnumType.STRING)
     private RoomResReserve roomReserve = RoomResReserve.예약완료;
+
+    public void setRoomReserve(RoomResReserve reserve) {
+        this.roomReserve = reserve;
+    }
 }

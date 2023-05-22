@@ -4,10 +4,7 @@ import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
 import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.service.RoomResService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,5 +15,10 @@ public class RoomResController {
     @PostMapping("")
     public RoomResResponseDto reserve(@RequestBody RoomResRequestDto roomResRequestDto) {
         return roomResService.reserve(roomResRequestDto);
+    }
+
+    @PatchMapping("cancel/{rrno}")
+    public RoomResResponseDto cancel(@PathVariable(name = "rrno") Long rrno) {
+        return roomResService.cancel(rrno);
     }
 }

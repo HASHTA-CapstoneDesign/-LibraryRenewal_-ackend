@@ -8,6 +8,7 @@ import hallym.hashtag.domain.room.repository.UseTimeRepository;
 import hallym.hashtag.domain.roomRes.dto.RoomResRequestDto;
 import hallym.hashtag.domain.roomRes.dto.RoomResResponseDto;
 import hallym.hashtag.domain.roomRes.entity.RoomRes;
+import hallym.hashtag.domain.roomRes.entity.RoomResReserve;
 import hallym.hashtag.domain.roomRes.repository.RoomResRepository;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
@@ -48,7 +49,23 @@ public class RoomResServicelmpl implements RoomResService {
 
         return toEntity(roomRes);
     }
-    
+
+    @Override
+    public RoomResResponseDto cancel(Long rrno) {
+        Optional<RoomRes> byRrno = roomResRepository.findById(rrno);
+        if(byRrno.isEmpty()) return null;
+        RoomRes roomRes = byRrno.get();
+        roomRes.setRoomReserve(RoomResReserve.사용자취소);
+        roomResRepository.save(roomRes);
+        List<UseTime> useTimes = roomRes.getRoom().getUseTimes();
+        for (int i = 0; i < useTimes.size(); i++) {
+            UseTime useTime = useTimes.get(i);
+            useTime.setRoomReserve(RoomReserve.예약가능);
+            useTimeRepository.save(useTime);
+        }
+        return toEntity(roomRes);
+    }
+
     private RoomRes toDto(Optional<Room> byRno, Optional<User> byUno, List<UseTime> byRtnos) {
         return RoomRes.builder()
                 .room(byRno.get())
