@@ -40,7 +40,7 @@ public class csvSave {
         String[] line;
         while ((line = reader.readNext()) != null) {
             User u = User.builder().name(line[0]).number(line[1])
-                    .phone(line[2]).department(line[3]).roles(line[4])
+                    .phone(line[2]).department(line[3]).role(line[4])
                     .password(bCryptPasswordEncoder.encode(line[5]))
                     .build();
             userRepository.save(u);
