@@ -15,8 +15,7 @@ public interface BookService {
 
     List<BookDto> findAllByLoanCount();
 
-//    List<BookDto> findAllByRecommend() throws IOException;
-
     List<BookDto> findAllByRecommend() throws IOException;
-    List<BookDto> findAllByRecommend(Long uno);
+
+    PageResponseDto<BookDto> search(String keyword, PageRequestDto pageRequestDto);
 }

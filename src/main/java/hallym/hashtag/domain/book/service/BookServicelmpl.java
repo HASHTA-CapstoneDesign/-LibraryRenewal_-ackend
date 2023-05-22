@@ -69,10 +69,26 @@ public class BookServicelmpl implements BookService {
         }
         return books.stream().map(this::toDto).collect(Collectors.toList());
     }
+
     @Override
-    public List<BookDto> findAllByRecommend(Long uno) {
-        return null;
+    public PageResponseDto<BookDto> search(String keyword, PageRequestDto pageRequestDto) {
+        Pageable pageable = PageRequest.of(pageRequestDto.getPage() <=0? 0:
+                        pageRequestDto.getPage()-1,
+                pageRequestDto.getSize());
+
+        Page<Book> bookList = bookRepository.search(keyword, pageable);
+
+        List<BookDto> bookDtos = bookList.getContent()
+                .stream().map(this::toDto).collect(Collectors.toList());
+
+
+        return PageResponseDto.<BookDto>withAll()
+                .pageRequestDto(pageRequestDto)
+                .dtoList(bookDtos)
+                .total((int)bookList.getTotalElements())
+                .build();
     }
+
 //    Jsoup.connect("http://34.64.172.201:5000/recommend/?input="+input).get().text();
 
     public BookDto toDto(Book book) {

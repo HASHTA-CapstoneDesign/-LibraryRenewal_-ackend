@@ -40,4 +40,9 @@ public class BookController {
     public List<BookDto> bookFindAllRecommend() throws IOException {
         return bookService.findAllByRecommend();
     }
+
+    @GetMapping("search")
+    public PageResponseDto<BookDto> bookFindAllRecommend(@RequestParam(value = "keyword") String keyword, PageRequestDto pageRequestDto) {
+        return bookService.search(keyword, pageRequestDto);
+    }
 }
