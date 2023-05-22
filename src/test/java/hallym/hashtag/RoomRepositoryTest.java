@@ -1,7 +1,7 @@
 package hallym.hashtag;
 
 import hallym.hashtag.domain.room.entity.Floor;
-import hallym.hashtag.domain.room.entity.Reserve;
+import hallym.hashtag.domain.room.entity.RoomReserve;
 import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.room.entity.UseTime;
 import hallym.hashtag.domain.room.repository.RoomRepository;
@@ -21,11 +21,11 @@ public class RoomRepositoryTest {
     public void testSave() {
         Room room = Room.builder().floor(Floor.floor1).name("17212호실").useData("20230521").build();
         roomRepository.save(room);
-        UseTime useTime1 = UseTime.builder().time("09:00-10:00").reserve(Reserve.예약가능).room(room).build();
-        UseTime useTime2 = UseTime.builder().time("10:00-11:00").reserve(Reserve.예약가능).room(room).build();
-        UseTime useTime3 = UseTime.builder().time("11:00-12:00").reserve(Reserve.예약가능).room(room).build();
-        UseTime useTime4 = UseTime.builder().time("12:00-13:00").reserve(Reserve.예약가능).room(room).build();
-        UseTime useTime5 = UseTime.builder().time("13:00-15:00").reserve(Reserve.예약가능).room(room).build();
+        UseTime useTime1 = UseTime.builder().time("09:00-10:00").roomReserve(RoomReserve.예약가능).room(room).build();
+        UseTime useTime2 = UseTime.builder().time("10:00-11:00").roomReserve(RoomReserve.예약가능).room(room).build();
+        UseTime useTime3 = UseTime.builder().time("11:00-12:00").roomReserve(RoomReserve.예약가능).room(room).build();
+        UseTime useTime4 = UseTime.builder().time("12:00-13:00").roomReserve(RoomReserve.예약가능).room(room).build();
+        UseTime useTime5 = UseTime.builder().time("13:00-15:00").roomReserve(RoomReserve.예약가능).room(room).build();
         useTimeRepository.save(useTime1);
         useTimeRepository.save(useTime2);
         useTimeRepository.save(useTime3);

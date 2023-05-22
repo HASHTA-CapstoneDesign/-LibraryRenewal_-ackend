@@ -1,8 +1,7 @@
 package hallym.hashtag.domain.room.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hallym.hashtag.domain.room.entity.Reserve;
-import hallym.hashtag.domain.room.entity.Room;
+import hallym.hashtag.domain.roomRes.entity.RoomRes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,11 +21,21 @@ public class UseTime {
 
     private String time;
 
-    private Reserve reserve;
+    @Enumerated(value = EnumType.STRING)
+    private RoomReserve roomReserve;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rrno")
+    private RoomRes roomRes;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rno")
     private Room room;
+
+    public void setRoomReserve(RoomReserve reserve) {
+        this.roomReserve = reserve;
+    }
 
 }

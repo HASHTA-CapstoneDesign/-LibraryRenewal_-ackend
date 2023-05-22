@@ -20,6 +20,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
 
+    @Enumerated(value = EnumType.STRING)
     private Floor floor;
 
     private String name;
