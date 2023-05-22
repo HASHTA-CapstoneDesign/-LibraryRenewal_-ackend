@@ -1,5 +1,6 @@
 package hallym.hashtag.domain.roomRes.service;
 
+import hallym.hashtag.domain.book.dto.BookDto;
 import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.room.entity.RoomReserve;
 import hallym.hashtag.domain.room.entity.UseTime;
@@ -12,13 +13,19 @@ import hallym.hashtag.domain.roomRes.entity.RoomResReserve;
 import hallym.hashtag.domain.roomRes.repository.RoomResRepository;
 import hallym.hashtag.domain.user.entity.User;
 import hallym.hashtag.domain.user.repository.UserRepository;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -37,17 +44,23 @@ public class RoomResServicelmpl implements RoomResService {
         Optional<User> byUno = userRepository.findById(roomResRequestDto.getUno());
         if(byUno.isEmpty()) return null;
         List<UseTime> byRtnos = useTimeRepository.findAllById(roomResRequestDto.getRtnos());
+        for (int i = 0; i < byRtnos.size(); i++) {
+            if(byRtnos.get(i).getRoomReserve().equals(RoomReserve.예약불가)) {
+                throw new RuntimeException(byRtnos.get(i).getTime() + " 시간에는 다른 유저가 예약 중이므로 해당 시간에 예약할 수 없습니다.");
+            }
+        }
 
-        RoomRes roomRes = toDto(byRno, byUno, byRtnos);
+        RoomRes roomRes = toEntity(byRno, byUno, byRtnos);
         roomResRepository.save(roomRes);
 
         for (int i = 0; i < byRtnos.size(); i++) {
             UseTime useTime = byRtnos.get(i);
             useTime.setRoomReserve(RoomReserve.예약불가);
+            useTime.setRoomRes(roomRes);
             useTimeRepository.save(useTime);
         }
 
-        return toEntity(roomRes);
+        return toDto(roomRes);
     }
 
     @Override
@@ -63,10 +76,28 @@ public class RoomResServicelmpl implements RoomResService {
             useTime.setRoomReserve(RoomReserve.예약가능);
             useTimeRepository.save(useTime);
         }
-        return toEntity(roomRes);
+        return toDto(roomRes);
     }
 
-    private RoomRes toDto(Optional<Room> byRno, Optional<User> byUno, List<UseTime> byRtnos) {
+    @Override
+    public PageResponseDto<RoomResResponseDto> findAllUno(Long uno, PageRequestDto pageRequestDto) {
+        Pageable pageable = PageRequest.of(pageRequestDto.getPage() <=0? 0:
+                        pageRequestDto.getPage()-1,
+                pageRequestDto.getSize());
+
+        Page<RoomRes> roomRes = roomResRepository.findByUser_Uno(uno, pageable);
+
+        List<RoomResResponseDto> dtoList = roomRes.getContent()
+                .stream().map(this::toDto).collect(Collectors.toList());
+
+        return PageResponseDto.<RoomResResponseDto>withAll()
+                .pageRequestDto(pageRequestDto)
+                .dtoList(dtoList)
+                .total((int)roomRes.getTotalElements())
+                .build();
+    }
+
+    private RoomRes toEntity(Optional<Room> byRno, Optional<User> byUno, List<UseTime> byRtnos) {
         return RoomRes.builder()
                 .room(byRno.get())
                 .user(byUno.get())
@@ -74,7 +105,7 @@ public class RoomResServicelmpl implements RoomResService {
                 .build();
     }
 
-    private RoomResResponseDto toEntity(RoomRes roomRes) {
+    private RoomResResponseDto toDto(RoomRes roomRes) {
         List<String> times = new ArrayList<>();
         for (int i = 0; i < roomRes.getUseTimes().size(); i++) {
             String time = roomRes.getUseTimes().get(i).getTime();

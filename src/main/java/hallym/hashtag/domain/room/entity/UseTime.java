@@ -2,10 +2,7 @@ package hallym.hashtag.domain.room.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hallym.hashtag.domain.roomRes.entity.RoomRes;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -24,6 +21,7 @@ public class UseTime {
     @Enumerated(value = EnumType.STRING)
     private RoomReserve roomReserve;
 
+    @Setter
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rrno")
