@@ -34,8 +34,6 @@ public class Notice extends BaseEntity {
     @OneToMany(mappedBy = "notice", fetch = FetchType.LAZY)
     private List<NoticeImage> images = new ArrayList<>();
 
-    private String imageFileName;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uno")
