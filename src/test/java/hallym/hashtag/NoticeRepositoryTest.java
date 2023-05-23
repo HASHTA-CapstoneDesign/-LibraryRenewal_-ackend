@@ -31,7 +31,7 @@ public class NoticeRepositoryTest {
 
     @Test
     public void testImageSave() {
-        Optional<Notice> byNno = noticeRepository.findById(2L);
+        Optional<Notice> byNno = noticeRepository.findById(1L);
         NoticeImage noticeImage = NoticeImage.builder().fileName("1.jpg").notice(byNno.get()).build();
         noticeImageRepository.save(noticeImage);
     }
