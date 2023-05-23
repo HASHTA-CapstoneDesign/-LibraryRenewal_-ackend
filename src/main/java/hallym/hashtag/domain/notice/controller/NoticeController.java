@@ -53,7 +53,7 @@ public class NoticeController {
     }
 
     @GetMapping(value = "image/{nno}" , produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> userSearch(@PathVariable("nno") Long nno) throws IOException {
-        return new ResponseEntity<byte[]>(noticeImageService.findImage(nno), HttpStatus.OK);
+    public byte[] getImage(@PathVariable("nno") Long nno) throws IOException {
+        return noticeImageService.findImage(nno);
     }
 }

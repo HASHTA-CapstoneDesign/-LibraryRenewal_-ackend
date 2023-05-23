@@ -20,7 +20,7 @@ public class NoticeImage {
     private String fileName;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nno")
     private Notice notice;
 

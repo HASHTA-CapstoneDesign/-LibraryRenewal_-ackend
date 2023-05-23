@@ -29,9 +29,10 @@ public class Notice extends BaseEntity {
 
     private boolean important;
 
+    @Builder.Default
     @JsonManagedReference
-    @OneToOne(mappedBy = "notice", fetch = FetchType.LAZY)
-    private NoticeImage image;
+    @OneToMany(mappedBy = "notice", fetch = FetchType.LAZY)
+    private List<NoticeImage> images = new ArrayList<>();
 
     private String imageFileName;
 

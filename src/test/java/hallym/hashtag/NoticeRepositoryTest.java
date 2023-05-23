@@ -25,7 +25,7 @@ public class NoticeRepositoryTest {
     public void testSave() {
         Optional<User> user = userRepository.findById(1L);
         Notice notice = Notice.builder().title("gg").content("gg").user(user.get())
-                .important(Boolean.TRUE).imageFileName("1.jpg").build();
+                .important(Boolean.TRUE).build();
         noticeRepository.save(notice);
     }
 
@@ -34,5 +34,6 @@ public class NoticeRepositoryTest {
         Optional<Notice> byNno = noticeRepository.findById(1L);
         NoticeImage noticeImage = NoticeImage.builder().fileName("1.jpg").notice(byNno.get()).build();
         noticeImageRepository.save(noticeImage);
+
     }
 }
