@@ -7,6 +7,10 @@ import hallym.hashtag.domain.abook.entity.ABook;
 import hallym.hashtag.domain.abook.repostory.ABookRepository;
 import hallym.hashtag.domain.book.entity.Book;
 import hallym.hashtag.domain.book.repository.BookRepository;
+import hallym.hashtag.domain.notice.entity.Notice;
+import hallym.hashtag.domain.notice.entity.NoticeImage;
+import hallym.hashtag.domain.notice.repository.NoticeImageRepository;
+import hallym.hashtag.domain.notice.repository.NoticeRepository;
 import hallym.hashtag.domain.room.entity.Floor;
 import hallym.hashtag.domain.room.entity.Room;
 import hallym.hashtag.domain.room.entity.RoomReserve;
@@ -25,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 
 @SpringBootTest
 public class csvSave {
@@ -40,6 +46,10 @@ public class csvSave {
     RoomRepository roomRepository;
     @Autowired
     UseTimeRepository useTimeRepository;
+    @Autowired
+    NoticeRepository noticeRepository;
+    @Autowired
+    NoticeImageRepository noticeImageRepository;
 
 
     @Test
@@ -114,6 +124,36 @@ public class csvSave {
                 useTimeRepository.save(useTime1);
             }
             i++;
+        }
+    }
+
+    @Test
+    public void noticeSave() throws IOException, CsvValidationException {
+        String url = "C:/study/project/LibraryRenewal_backend/src/main/resources/data/noticedata.csv";
+
+        CSVReader reader = new CSVReaderBuilder(new FileReader(url))
+                .withSkipLines(1)
+                .build();
+
+        String[] line;
+//        제목,내용,중요도,이미지1,이미지2,이미지3,작성자
+        while ((line = reader.readNext()) != null) {
+            Optional<User> user = userRepository.findById(Long.valueOf(line[6]));
+            Notice notice = Notice.builder().title(line[0])
+                    .content(line[1]).important(Boolean.parseBoolean(line[2])).user(user.get()).build();
+            noticeRepository.save(notice);
+
+            if (Objects.equals(line[3], "")) continue;
+            noticeImageRepository.save(NoticeImage.builder()
+                    .fileName(line[3]).notice(notice).build());
+
+            if (Objects.equals(line[4], "")) continue;
+            noticeImageRepository.save(NoticeImage.builder()
+                    .fileName(line[4]).notice(notice).build());
+
+            if (Objects.equals(line[5], "")) continue;
+            noticeImageRepository.save(NoticeImage.builder()
+                    .fileName(line[5]).notice(notice).build());
         }
     }
 }

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: "local"
+    include: "gcp"
   datasource:
     url: ${spring.datasource.url}
     driverClassName: ${spring.datasource.driver-class-name}
