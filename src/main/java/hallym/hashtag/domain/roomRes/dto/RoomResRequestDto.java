@@ -1,20 +1,17 @@
 package hallym.hashtag.domain.roomRes.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Getter
 public class RoomResRequestDto {
+    private Long uno; //유저 아이디
 
-    private List<String> useTimes = new ArrayList<>();
+    private Long rno; // 시설 아이디
 
-    private String useData;
+    private List<Long> rtnos; // 시간 아이디
 }

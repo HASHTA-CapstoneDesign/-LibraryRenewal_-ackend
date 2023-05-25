@@ -1,21 +1,16 @@
 package hallym.hashtag.domain.notice.service;
 
-import hallym.hashtag.domain.notice.dto.NoticeRequestDto;
 import hallym.hashtag.domain.notice.dto.NoticeResponseDto;
+import hallym.hashtag.global.baseDto.PageRequestDto;
+import hallym.hashtag.global.baseDto.PageResponseDto;
 
 import java.util.List;
 
 public interface NoticeService {
 
-    NoticeResponseDto create(Long uno, NoticeRequestDto noticeRequestDto);
+    PageResponseDto<NoticeResponseDto> findAll(PageRequestDto pageRequestDto);
 
-    List<NoticeResponseDto> findAll();
+    PageResponseDto<NoticeResponseDto> search(String keyword, PageRequestDto pageRequestDto);
 
-    NoticeResponseDto findByOne(Long nno);
-
-    NoticeResponseDto update(Long nno, NoticeRequestDto noticeRequestDto);
-
-    String delete(Long nno);
-
-    List<NoticeResponseDto> search(String keyword);
+    List<NoticeResponseDto> findByImportant();
 }

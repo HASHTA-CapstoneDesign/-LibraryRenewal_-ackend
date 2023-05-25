@@ -27,12 +27,5 @@ public class User {
     private String password;
     private String phone;
     private String department; // 소속, 학생은 학과정보, 어드민은 부서정보
-    private String roles; // USER, ADMIN
-
-    public List<String> getRoleList() {
-        if (this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
+    private String role; // USER, ADMIN
 }

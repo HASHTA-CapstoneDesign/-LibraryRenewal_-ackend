@@ -1,9 +1,12 @@
 package hallym.hashtag.domain.book.dto;
 
+import hallym.hashtag.domain.abook.entity.ABook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder

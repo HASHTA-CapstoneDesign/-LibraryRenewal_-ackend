@@ -1,11 +1,13 @@
 spring:
   profiles:
-    include: "local"
+    include: "gcp"
   datasource:
     url: ${spring.datasource.url}
     driverClassName: ${spring.datasource.driver-class-name}
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
+  file:
+    name: ${spring.file.name}
 
   jpa:
     open-in-view: true
@@ -31,3 +33,6 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     use-root-path: true
+
+jwt :
+  secret : hellymkimmijinbekedehdgoanfrhkqorentksdlakfmrhekfgehfhrgksmsmsladlgksmslsadlqhdngkekdnflskfkakstp

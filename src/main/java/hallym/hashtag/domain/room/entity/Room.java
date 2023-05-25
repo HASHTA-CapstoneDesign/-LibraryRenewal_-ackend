@@ -1,19 +1,17 @@
 package hallym.hashtag.domain.room.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
-@Builder
 @Entity
-@Table(name = "room")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +22,10 @@ public class Room {
 
     private String name;
 
-    private String content;
+    private String useData;
 
-    @ColumnDefault("false")
-    private boolean studyRoom;
-
-    @ColumnDefault("false")
-    private boolean reserve;
-
-    public void setReserve(boolean reserve) {
-        this.reserve = reserve;
-    }
+    @Builder.Default
+    @JsonManagedReference
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<UseTime> useTimes = new ArrayList<>();
 }

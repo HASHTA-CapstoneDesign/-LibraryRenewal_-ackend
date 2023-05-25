@@ -32,14 +32,14 @@ public class LoanController {
 
     @ApiOperation(value = "책 대출 연장", notes = "책을 대출기한을 연장합니다.")
     @ApiImplicitParam(name = "lno", value = "대출이력 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
-    @PutMapping("checkout/{lno}")
+    @PatchMapping("checkout/{lno}")
     public LoanResponseDto loanExtension(@PathVariable(name = "lno") Long lno){
         return loanService.extension(lno);
     }
 
     @ApiOperation(value = "책 반납", notes = "대출한 책을 반납합니다.")
     @ApiImplicitParam(name = "lno", value = "대출이력 아이디(고유 식별 번호)", required = true, dataTypeClass = Long.class)
-    @PutMapping("return/{lno}")
+    @PatchMapping("return/{lno}")
     public LoanResponseDto loanReturn(@PathVariable(name = "lno") Long lno) {
         return loanService.returnBook(lno);
     }

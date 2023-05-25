@@ -1,25 +1,24 @@
 package hallym.hashtag.domain.room.dto;
 
 import hallym.hashtag.domain.room.entity.Floor;
+import hallym.hashtag.domain.room.entity.UseTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class RoomDto {
-    private Long rno;
+import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+public class RoomDto {
     private Floor floor;
 
     private String name;
 
-    private String content;
+    private String useData;
 
-    private boolean studyRoom;
-
-    private boolean reserve;
+    private List<UseTime> useTimes;
 }

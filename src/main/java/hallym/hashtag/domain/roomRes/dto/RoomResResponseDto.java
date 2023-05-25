@@ -1,25 +1,28 @@
 package hallym.hashtag.domain.roomRes.dto;
 
+import hallym.hashtag.domain.room.entity.Floor;
+import hallym.hashtag.domain.roomRes.entity.RoomResReserve;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Getter
 public class RoomResResponseDto {
-    private Long rrno;
+
+    private LocalDate creDate; //신청일자
+
+    private RoomResReserve roomReserve;
+
+    private Floor floor;
 
     private String roomName;
 
-    private String useData;
-
-    private List<String> useTimes = new ArrayList<>();
-
-    private Boolean reserve;
+    private List<String> useTimes;
 }
