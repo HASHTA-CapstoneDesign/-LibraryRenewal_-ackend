@@ -13,7 +13,7 @@ public class ChatBotController {
 
     @GetMapping
     public Map<String, String> ChatBot(@RequestParam(name = "message") String message) throws IOException {
-        String result = Jsoup.connect("http://localhost:5000/chatbot/?input="+message).get().text();;
+        String result = Jsoup.connect("http://127.0.0.1:5000/chatbot/?input="+message).get().text();;
         return Map.of("result", result);
     }
 }
