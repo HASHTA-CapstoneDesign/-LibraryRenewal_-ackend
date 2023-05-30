@@ -2,9 +2,9 @@
 
 ## Deployment url
 
-> **프론트 서버** : [http://34.64.215.230.com:3000/](http://34.64.215.230.come:3000/)<br>
+> **프론트 서버** : [http://34.64.215.230:3000/](http://34.64.215.230:3000/)<br>
 
-> **백엔드 서버** : [http://34.64.215.230.com:8080/](http://34.64.215.230.come:8080/)<br>
+> **백엔드 서버** : [http://34.64.215.230:8080/](http://34.64.215.230:8080/)<br>
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVoluntain-SKKU%2FLibraryRenewal_backend&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
