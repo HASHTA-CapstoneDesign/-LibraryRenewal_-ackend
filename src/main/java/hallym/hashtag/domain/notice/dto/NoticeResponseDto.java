@@ -25,4 +25,6 @@ public class NoticeResponseDto {
     private LocalDateTime modDate;
 
     private boolean important;
+
+    private String image;
 }

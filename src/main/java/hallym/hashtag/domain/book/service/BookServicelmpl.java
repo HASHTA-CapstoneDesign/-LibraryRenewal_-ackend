@@ -59,7 +59,7 @@ public class BookServicelmpl implements BookService {
     public List<BookDto> findAllByRecommend() throws IOException {
         List<Book> bookList = bookRepository.findAllByLoanCount();
         String isbn = bookList.get(0).getIsbn();
-        String result = Jsoup.connect("http://localhost:5000/recommend/?input="+isbn).get().text();
+        String result = Jsoup.connect("http://127.0.0.1:5000/recommend/?input="+isbn).get().text();
         List<String> resultList = List.of(result.split(" "));
         List<Book> books = new ArrayList<>();
         for (int i = 1; i < 6; i=i+2) {

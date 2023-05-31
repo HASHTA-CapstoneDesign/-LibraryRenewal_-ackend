@@ -30,6 +30,8 @@ public class Notice extends BaseEntity {
 
     private boolean important;
 
+    private String image;
+
     @Builder.Default
     @JsonManagedReference
     @OneToMany(mappedBy = "notice", fetch = FetchType.LAZY)

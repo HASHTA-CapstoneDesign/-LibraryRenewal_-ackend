@@ -76,6 +76,7 @@ public class NoticeServicelmpl implements NoticeService{
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
                 .important(notice.isImportant())
+                .image(notice.getImage())
                 .writer("관리자").build();
     }
 }
