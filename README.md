@@ -13,7 +13,6 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![mysql](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mariadb&logoColor=white)
 ![googlecloud](https://img.shields.io/badge/googlecloud-4285F4.svg?style=for-the-badge&logo=googlecloud&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 ## Dependencies
 - spring JPA
