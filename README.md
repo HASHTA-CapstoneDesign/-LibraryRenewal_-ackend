@@ -22,6 +22,14 @@
 - commons
 - jjwt
 
+## ERD Diagram
+![image](https://github.com/mijin0721/LibraryRenewal_backend/assets/112682489/6941acf3-66f9-41d2-9210-649a24f330b4)
+
+
+## System Architecture
+![image](https://github.com/mijin0721/LibraryRenewal_backend/assets/112682489/8a58865f-c1ae-4383-8fb3-95d01aa98590)
+
+
 ## REST API Endpoint
 > - Get
 > - Patch
